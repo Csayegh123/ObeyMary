@@ -1,0 +1,1855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Obeymary — Enterprise Cannabis Compliance Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   OBEYMARY ENTERPRISE — Design System
+   Primary palette: Near-black, cool slate, electric green accent
+   Typography: Inter (system-grade), JetBrains Mono for data
+═══════════════════════════════════════════════════════════════ */
+:root {
+  /* Core surfaces */
+  --s0: #050507;
+  --s1: #0C0C10;
+  --s2: #111116;
+  --s3: #17171E;
+  --s4: #1C1C25;
+  --s5: #22222D;
+  --s6: #282835;
+
+  /* Borders */
+  --b1: rgba(255,255,255,.05);
+  --b2: rgba(255,255,255,.09);
+  --b3: rgba(255,255,255,.14);
+  --b4: rgba(255,255,255,.20);
+
+  /* Text */
+  --t1: #F2F2F8;
+  --t2: #A0A0BC;
+  --t3: #606078;
+  --t4: #353548;
+
+  /* Brand */
+  --green: #5DDF2E;
+  --green-dim: rgba(93,223,46,.10);
+  --green-border: rgba(93,223,46,.20);
+  --green-text: #7AE84E;
+
+  /* Accent */
+  --indigo: #5865F2;
+  --indigo-dim: rgba(88,101,242,.15);
+
+  /* Status */
+  --red: #E84040;
+  --red-dim: rgba(232,64,64,.12);
+  --amber: #D97706;
+  --amber-dim: rgba(217,119,6,.12);
+  --blue: #2E86DE;
+  --blue-dim: rgba(46,134,222,.12);
+
+  /* Radii */
+  --r1: 4px;
+  --r2: 6px;
+  --r3: 8px;
+  --r4: 10px;
+  --r5: 14px;
+
+  /* Shadows */
+  --elev1: 0 1px 3px rgba(0,0,0,.4), 0 1px 2px rgba(0,0,0,.3);
+  --elev2: 0 4px 16px rgba(0,0,0,.5), 0 2px 6px rgba(0,0,0,.3);
+  --elev3: 0 12px 40px rgba(0,0,0,.6), 0 4px 12px rgba(0,0,0,.4);
+
+  /* Font */
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  background: var(--s0);
+  color: var(--t1);
+  font-family: var(--font);
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+input, textarea, select, button { font-family: var(--font); }
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--s6); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--t4); }
+
+/* ── SETUP SCREEN ─────────────────────────────────────── */
+#screen-setup {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background: var(--s0);
+  position: relative;
+}
+#screen-setup::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 45% at 50% 0%, rgba(88,101,242,.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.setup-wrap {
+  width: 420px;
+  z-index: 1;
+}
+.setup-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+.setup-logo-row .wordmark {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -.03em;
+  color: var(--t1);
+}
+.setup-logo-row .version {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--t3);
+  border: 1px solid var(--b2);
+  padding: 2px 7px;
+  border-radius: 100px;
+  margin-top: 2px;
+}
+.setup-card {
+  background: var(--s2);
+  border: 1px solid var(--b2);
+  border-radius: var(--r5);
+  padding: 32px;
+  box-shadow: var(--elev3);
+}
+.setup-card h1 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -.03em;
+  margin-bottom: 8px;
+}
+.setup-card .sub {
+  font-size: 13px;
+  color: var(--t2);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+.info-box {
+  background: var(--s3);
+  border: 1px solid var(--b1);
+  border-left: 3px solid var(--indigo);
+  border-radius: var(--r2);
+  padding: 13px 15px;
+  font-size: 12px;
+  color: var(--t2);
+  line-height: 1.8;
+  margin-bottom: 22px;
+}
+.info-box a { color: var(--green-text); text-decoration: none; }
+.info-box a:hover { text-decoration: underline; }
+.info-box strong { color: var(--t1); font-weight: 500; }
+.form-field { margin-bottom: 16px; }
+.form-field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--t3);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  margin-bottom: 6px;
+}
+.form-input {
+  width: 100%;
+  background: var(--s3);
+  border: 1px solid var(--b2);
+  border-radius: var(--r3);
+  color: var(--t1);
+  font-size: 13px;
+  padding: 10px 12px;
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+.form-input:focus {
+  border-color: var(--indigo);
+  box-shadow: 0 0 0 3px rgba(88,101,242,.15);
+}
+.form-input::placeholder { color: var(--t4); }
+.form-input.invalid { border-color: var(--red); }
+.form-err {
+  font-size: 12px;
+  color: var(--red);
+  margin-top: 5px;
+  display: none;
+}
+.btn-launch {
+  width: 100%;
+  padding: 11px;
+  background: var(--indigo);
+  color: #fff;
+  border: none;
+  border-radius: var(--r3);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s;
+  letter-spacing: -.01em;
+  margin-top: 4px;
+}
+.btn-launch:hover { background: #6875f5; }
+.setup-demo-link {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--t3);
+}
+.setup-demo-link a {
+  color: var(--t2);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ── APP SHELL ─────────────────────────────────────────── */
+#app {
+  display: none;
+  height: 100vh;
+  flex-direction: column;
+}
+
+/* ── TOPBAR ─────────────────────────────────────────────── */
+.topbar {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  background: var(--s1);
+  border-bottom: 1px solid var(--b1);
+  flex-shrink: 0;
+  gap: 8px;
+  z-index: 100;
+}
+.top-logo { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.top-logo .wm {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -.03em;
+}
+.top-sep { width: 1px; height: 18px; background: var(--b2); margin: 0 2px; }
+.workspace-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--t2);
+  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.topbar-search {
+  flex: 1;
+  max-width: 340px;
+  margin: 0 12px;
+  position: relative;
+}
+.topbar-search input {
+  width: 100%;
+  background: var(--s3);
+  border: 1px solid var(--b2);
+  border-radius: var(--r3);
+  color: var(--t1);
+  font-size: 12.5px;
+  padding: 6px 10px 6px 32px;
+  outline: none;
+  transition: border-color .15s;
+}
+.topbar-search input:focus { border-color: var(--b3); }
+.topbar-search input::placeholder { color: var(--t3); }
+.topbar-search .search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--t3);
+}
+.t-grow { flex: 1; }
+.top-state-sel {
+  background: var(--s3);
+  border: 1px solid var(--b2);
+  border-radius: var(--r2);
+  color: var(--t2);
+  font-size: 12px;
+  padding: 4px 8px;
+  outline: none;
+  cursor: pointer;
+  font-family: var(--font);
+}
+.api-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 11px;
+  border: 1px solid var(--b2);
+  border-radius: 100px;
+  font-size: 11px;
+  color: var(--t3);
+  cursor: pointer;
+  transition: all .15s;
+}
+.api-status:hover { border-color: var(--b3); color: var(--t2); }
+.api-dot { width: 6px; height: 6px; border-radius: 50%; }
+.api-dot.live { background: var(--green); box-shadow: 0 0 6px var(--green); }
+.api-dot.demo { background: var(--amber); }
+.top-avatar {
+  width: 28px; height: 28px;
+  border-radius: var(--r2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+  cursor: pointer;
+  border: 1px solid var(--b2);
+  transition: border-color .15s;
+}
+.top-avatar:hover { border-color: var(--b3); }
+
+/* ── MAIN LAYOUT ─────────────────────────────────────────── */
+.app-body { display: flex; flex: 1; overflow: hidden; }
+
+/* ── ICON RAIL ───────────────────────────────────────────── */
+.rail {
+  width: 54px;
+  background: var(--s1);
+  border-right: 1px solid var(--b1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 0;
+  gap: 1px;
+  flex-shrink: 0;
+}
+.rail-item {
+  width: 38px; height: 38px;
+  border-radius: var(--r3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+  color: var(--t3);
+  transition: all .15s;
+  position: relative;
+}
+.rail-item:hover { background: var(--s3); color: var(--t2); }
+.rail-item.active { background: var(--indigo-dim); color: var(--indigo); }
+.rail-item svg { flex-shrink: 0; }
+.rail-item .rl { font-size: 9px; font-weight: 600; letter-spacing: .02em; }
+.rail-notif {
+  position: absolute;
+  top: 3px; right: 3px;
+  min-width: 15px; height: 15px;
+  background: var(--red);
+  border-radius: 8px;
+  font-size: 9px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid var(--s1);
+  padding: 0 3px;
+  color: #fff;
+}
+.rail-div { width: 24px; height: 1px; background: var(--b2); margin: 4px 0; }
+
+/* ── SIDEBAR ─────────────────────────────────────────────── */
+.sidebar {
+  width: 232px;
+  background: var(--s1);
+  border-right: 1px solid var(--b1);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.sb-org {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--b1);
+  cursor: pointer;
+  transition: background .15s;
+}
+.sb-org:hover { background: var(--s2); }
+.sb-org-av {
+  width: 26px; height: 26px;
+  background: var(--indigo);
+  border-radius: var(--r1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800;
+  color: #fff; flex-shrink: 0;
+}
+.sb-org-name { font-size: 13px; font-weight: 600; letter-spacing: -.01em; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sb-org-chevron { color: var(--t3); flex-shrink: 0; }
+.sb-scroll { flex: 1; overflow-y: auto; padding: 8px 0; }
+.sb-section { margin-bottom: 2px; }
+.sb-sec-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 10px 4px 12px;
+  cursor: pointer;
+  color: var(--t3);
+  transition: color .15s;
+  user-select: none;
+}
+.sb-sec-header:hover { color: var(--t2); }
+.sb-sec-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.sb-sec-add {
+  width: 18px; height: 18px;
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+  transition: all .15s;
+  font-size: 14px;
+  color: var(--t3);
+}
+.sb-sec-header:hover .sb-sec-add { opacity: 1; }
+.sb-sec-add:hover { background: var(--s4); color: var(--t1); }
+.sb-items { display: flex; flex-direction: column; }
+.sb-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px 4px 14px;
+  cursor: pointer;
+  color: var(--t2);
+  font-size: 13px;
+  border-radius: 0;
+  transition: background .1s, color .1s;
+  position: relative;
+  min-height: 28px;
+}
+.sb-row:hover { background: var(--s3); color: var(--t1); }
+.sb-row.active {
+  background: var(--s4);
+  color: var(--t1);
+}
+.sb-row.active::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 4px; bottom: 4px;
+  width: 3px;
+  background: var(--indigo);
+  border-radius: 0 3px 3px 0;
+}
+.sb-row .sb-icon { flex-shrink: 0; color: var(--t3); width: 14px; }
+.sb-row.active .sb-icon { color: var(--indigo); }
+.sb-row .sb-av {
+  width: 20px; height: 20px;
+  border-radius: 5px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 700;
+  flex-shrink: 0;
+}
+.sb-row .sb-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px; }
+.sb-row .sb-unread {
+  font-size: 10px; font-weight: 700;
+  min-width: 16px; height: 16px;
+  background: var(--red);
+  color: #fff;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 4px;
+  flex-shrink: 0;
+}
+.sb-row .sb-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.sb-row .sb-dot.on { background: var(--green); }
+.sb-row .sb-dot.away { background: var(--amber); }
+.sb-row .sb-dot.off { background: var(--t4); }
+.sb-footer {
+  border-top: 1px solid var(--b1);
+  padding: 10px 12px;
+  flex-shrink: 0;
+}
+.sb-me {
+  display: flex; align-items: center; gap: 9px;
+  cursor: pointer; border-radius: var(--r2);
+  padding: 5px 4px;
+  transition: background .15s;
+}
+.sb-me:hover { background: var(--s3); }
+.sb-me-info { flex: 1; min-width: 0; }
+.sb-me-name { font-size: 13px; font-weight: 600; letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sb-me-role { font-size: 11px; color: var(--t3); }
+
+/* ── MAIN AREA ────────────────────────────────────────────── */
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--s2); }
+
+/* ── CHANNEL HEADER ──────────────────────────────────────── */
+.chan-header {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  background: var(--s2);
+  border-bottom: 1px solid var(--b1);
+  flex-shrink: 0;
+  gap: 10px;
+}
+.chan-icon-wrap {
+  width: 28px; height: 28px;
+  border-radius: var(--r2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.chan-title-block { flex: 1; min-width: 0; }
+.chan-title { font-size: 14px; font-weight: 600; letter-spacing: -.01em; }
+.chan-desc { font-size: 11.5px; color: var(--t3); }
+.chan-header-actions { display: flex; align-items: center; gap: 6px; }
+.hdr-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 5px 10px;
+  background: transparent;
+  border: 1px solid var(--b2);
+  border-radius: var(--r2);
+  font-size: 12px;
+  color: var(--t2);
+  cursor: pointer;
+  transition: all .15s;
+  font-family: var(--font);
+}
+.hdr-btn:hover { background: var(--s4); border-color: var(--b3); color: var(--t1); }
+.hdr-btn-primary {
+  background: var(--green-dim);
+  border-color: var(--green-border);
+  color: var(--green-text);
+}
+.hdr-btn-primary:hover { background: rgba(93,223,46,.16); color: var(--green); }
+
+/* ── PARTICIPANT STRIP ───────────────────────────────────── */
+.participant-strip {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 20px;
+  background: var(--s1);
+  border-bottom: 1px solid var(--b1);
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+.participant-strip.visible { display: flex; }
+.part-av {
+  width: 24px; height: 24px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
+  position: relative;
+  transition: transform .15s;
+}
+.part-av:hover { transform: scale(1.1); }
+.part-av .status-ring {
+  position: absolute;
+  bottom: -2px; right: -2px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  border: 2px solid var(--s1);
+}
+.part-add {
+  width: 24px; height: 24px;
+  border-radius: 6px;
+  border: 1px dashed var(--b3);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: var(--t3);
+  font-size: 14px;
+  transition: all .15s;
+  flex-shrink: 0;
+}
+.part-add:hover { border-color: var(--indigo); color: var(--indigo); background: var(--indigo-dim); }
+.part-label { font-size: 11px; color: var(--t3); white-space: nowrap; margin-right: 4px; }
+
+/* ── MESSAGES ────────────────────────────────────────────── */
+.msg-area { flex: 1; overflow-y: auto; }
+.msg-scroller { padding: 16px 20px; display: flex; flex-direction: column; gap: 0; }
+
+.date-pill {
+  display: flex; align-items: center; gap: 10px;
+  color: var(--t3); font-size: 11px; font-weight: 600;
+  letter-spacing: .04em; text-transform: uppercase;
+  margin: 16px 0 12px;
+}
+.date-pill::before, .date-pill::after {
+  content: ''; flex: 1; height: 1px; background: var(--b1);
+}
+
+.msg-block { display: flex; gap: 10px; padding: 2px 4px; border-radius: var(--r2); transition: background .08s; }
+.msg-block:hover { background: var(--s3); }
+.msg-block.first-in-group { margin-top: 12px; }
+.msg-av-col { width: 34px; flex-shrink: 0; padding-top: 1px; }
+.msg-av {
+  width: 34px; height: 34px;
+  border-radius: var(--r2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700;
+  flex-shrink: 0;
+}
+.msg-av-ghost { width: 34px; height: 34px; flex-shrink: 0; }
+.msg-body { flex: 1; min-width: 0; }
+.msg-header { display: flex; align-items: baseline; gap: 7px; margin-bottom: 2px; }
+.msg-author { font-size: 13.5px; font-weight: 600; letter-spacing: -.01em; }
+.msg-time { font-size: 11px; color: var(--t3); }
+.role-tag {
+  font-size: 10px; font-weight: 600;
+  padding: 1px 6px; border-radius: 100px;
+  letter-spacing: .03em;
+}
+.role-tag.state-officer { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(46,134,222,.2); }
+.role-tag.compliance { background: var(--green-dim); color: var(--green-text); border: 1px solid var(--green-border); }
+.role-tag.ai { background: var(--indigo-dim); color: #818cf8; border: 1px solid rgba(88,101,242,.25); }
+.role-tag.you { background: var(--s5); color: var(--t2); border: 1px solid var(--b2); }
+.msg-text {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--t1);
+  word-break: break-word;
+}
+.msg-text strong { color: #fff; font-weight: 600; }
+.msg-text code {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  background: var(--s5);
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: var(--green-text);
+  border: 1px solid var(--b1);
+}
+.msg-text ul { padding-left: 18px; margin: 6px 0; }
+.msg-text li { margin-bottom: 3px; line-height: 1.5; }
+.msg-text h4 { font-size: 13.5px; font-weight: 600; margin: 8px 0 4px; }
+.msg-text blockquote {
+  border-left: 3px solid var(--b3);
+  padding-left: 12px;
+  color: var(--t2);
+  margin: 6px 0;
+}
+.msg-text a { color: #818cf8; text-decoration: underline; text-underline-offset: 2px; }
+.msg-text p { margin-bottom: 6px; }
+.msg-text p:last-child { margin-bottom: 0; }
+.msg-text table { border-collapse: collapse; font-size: 12px; margin: 8px 0; }
+.msg-text td, .msg-text th { padding: 4px 10px; border: 1px solid var(--b2); }
+.msg-text th { background: var(--s4); font-weight: 600; }
+
+.msg-actions-row {
+  display: none;
+  position: absolute;
+  right: 8px; top: 2px;
+  background: var(--s3);
+  border: 1px solid var(--b2);
+  border-radius: var(--r3);
+  padding: 3px;
+  gap: 2px;
+  box-shadow: var(--elev2);
+}
+.msg-block:hover .msg-actions-row { display: flex; }
+.msg-action {
+  width: 26px; height: 26px;
+  border-radius: var(--r1);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: var(--t3);
+  font-size: 13px;
+  transition: all .12s;
+  border: none; background: none;
+}
+.msg-action:hover { background: var(--s5); color: var(--t1); }
+
+/* COMPLIANCE RESPONSE CARD */
+.compliance-response {
+  background: var(--s3);
+  border: 1px solid var(--b2);
+  border-left: 3px solid var(--green);
+  border-radius: var(--r4);
+  padding: 14px 16px;
+  margin: 8px 0;
+  max-width: 560px;
+}
+.cr-header {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+}
+.cr-state-badge {
+  font-size: 10px; font-weight: 700;
+  color: var(--green-text);
+  background: var(--green-dim);
+  border: 1px solid var(--green-border);
+  padding: 2px 8px; border-radius: 100px;
+  letter-spacing: .05em; text-transform: uppercase;
+}
+.cr-rule { font-size: 11px; color: var(--t3); font-family: var(--mono); }
+.cr-content { font-size: 13px; line-height: 1.65; color: var(--t1); }
+.cr-content strong { color: var(--green-text); }
+.cr-content ul { padding-left: 16px; margin: 6px 0; }
+.cr-content li { margin-bottom: 3px; }
+.cr-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 12px; padding-top: 10px;
+  border-top: 1px solid var(--b1);
+}
+.cr-source { font-size: 11px; color: var(--t3); }
+.cr-source a { color: #818cf8; text-decoration: underline; }
+.cr-actions { display: flex; gap: 6px; }
+.cr-btn {
+  font-size: 11px; padding: 4px 9px;
+  border: 1px solid var(--b2); border-radius: var(--r1);
+  background: transparent; color: var(--t2);
+  cursor: pointer; transition: all .15s; font-family: var(--font);
+}
+.cr-btn:hover { background: var(--s5); color: var(--t1); border-color: var(--b3); }
+
+/* SYSTEM MSG */
+.system-msg {
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--t3);
+  padding: 6px 0;
+  margin: 4px 0;
+}
+
+/* TYPING */
+.typing-indicator {
+  display: flex; align-items: center; gap: 8px;
+  color: var(--t3); font-size: 12px;
+  padding: 8px 4px;
+}
+.typing-dots { display: flex; gap: 3px; align-items: center; }
+.typing-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--t3);
+  animation: typeBounce 1.3s infinite ease-in-out;
+}
+.typing-dot:nth-child(2) { animation-delay: .15s; }
+.typing-dot:nth-child(3) { animation-delay: .3s; }
+@keyframes typeBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: .4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* EMPTY STATE */
+.empty-channel {
+  text-align: center;
+  padding: 60px 32px;
+  color: var(--t3);
+}
+.empty-channel .ec-icon { font-size: 36px; margin-bottom: 14px; }
+.empty-channel h3 { font-size: 15px; font-weight: 600; color: var(--t2); margin-bottom: 6px; letter-spacing: -.01em; }
+.empty-channel p { font-size: 13px; line-height: 1.6; }
+
+/* AI WELCOME */
+.ai-welcome {
+  text-align: center;
+  padding: 48px 32px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.ai-welcome h2 { font-size: 20px; font-weight: 700; letter-spacing: -.03em; margin: 18px 0 10px; }
+.ai-welcome p { font-size: 13px; color: var(--t2); line-height: 1.7; margin-bottom: 28px; }
+.sug-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; text-align: left; }
+.sug-chip {
+  background: var(--s3);
+  border: 1px solid var(--b2);
+  border-radius: var(--r3);
+  padding: 10px 12px;
+  font-size: 12.5px;
+  color: var(--t2);
+  cursor: pointer;
+  line-height: 1.5;
+  transition: all .15s;
+}
+.sug-chip:hover { background: var(--s4); border-color: var(--b3); color: var(--t1); }
+.sug-chip::before { content: '→ '; color: var(--green); }
+
+/* ── MESSAGE INPUT ──────────────────────────────────────── */
+.input-zone {
+  padding: 10px 16px 12px;
+  background: var(--s2);
+  border-top: 1px solid var(--b1);
+  flex-shrink: 0;
+}
+.input-shell {
+  background: var(--s3);
+  border: 1px solid var(--b2);
+  border-radius: var(--r4);
+  transition: border-color .15s;
+}
+.input-shell:focus-within { border-color: var(--b3); }
+.input-toolbar {
+  display: flex; align-items: center; gap: 2px;
+  padding: 7px 10px 5px;
+  border-bottom: 1px solid var(--b1);
+}
+.tb-btn {
+  width: 26px; height: 26px;
+  border-radius: var(--r1);
+  display: flex; align-items: center; justify-content: center;
+  border: none; background: none;
+  color: var(--t3); cursor: pointer;
+  transition: all .12s; font-size: 12px;
+}
+.tb-btn:hover { background: var(--s5); color: var(--t2); }
+.tb-sep { width: 1px; height: 16px; background: var(--b2); margin: 0 3px; }
+.msg-textarea {
+  width: 100%;
+  background: none;
+  border: none; outline: none;
+  color: var(--t1);
+  font-size: 13.5px;
+  line-height: 1.55;
+  resize: none;
+  min-height: 24px;
+  max-height: 120px;
+  padding: 8px 12px;
+  font-family: var(--font);
+}
+.msg-textarea::placeholder { color: var(--t3); }
+.input-footer {
+  display: flex; align-items: center;
+  padding: 6px 10px;
+  gap: 8px;
+}
+.if-left { display: flex; align-items: center; gap: 6px; flex: 1; }
+.if-chip {
+  display: flex; align-items: center; gap: 5px;
+  padding: 4px 9px;
+  border: none; background: none;
+  border-radius: var(--r1);
+  font-size: 12px; color: var(--t3);
+  cursor: pointer; transition: all .12s;
+  font-family: var(--font);
+}
+.if-chip:hover { background: var(--s5); color: var(--t2); }
+.char-ct { font-size: 11px; color: var(--t3); }
+.send-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 14px;
+  background: var(--indigo);
+  color: #fff; border: none;
+  border-radius: var(--r2);
+  font-size: 12.5px; font-weight: 600;
+  cursor: pointer; transition: background .15s;
+  font-family: var(--font);
+}
+.send-btn:hover { background: #6875f5; }
+.send-btn:disabled { opacity: .35; cursor: not-allowed; }
+
+/* ── PANES ──────────────────────────────────────────────── */
+.pane { flex: 1; display: none; flex-direction: column; overflow: hidden; }
+.pane.active { display: flex; }
+
+/* UPDATES PANE */
+.pane-inner { flex: 1; overflow-y: auto; padding: 16px 20px; }
+.pane-search {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--b1);
+  background: var(--s2);
+  flex-shrink: 0;
+}
+.search-bar {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--s3);
+  border: 1px solid var(--b2);
+  border-radius: var(--r3);
+  padding: 6px 11px;
+}
+.search-bar input { flex: 1; background: none; border: none; outline: none; font-size: 13px; color: var(--t1); font-family: var(--font); }
+.search-bar input::placeholder { color: var(--t3); }
+.update-card {
+  background: var(--s3);
+  border: 1px solid var(--b1);
+  border-radius: var(--r4);
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all .15s;
+  border-left: 3px solid transparent;
+}
+.update-card:hover { border-color: var(--b2); background: var(--s4); }
+.update-card.high { border-left-color: var(--red); }
+.update-card.medium { border-left-color: var(--amber); }
+.update-card.low { border-left-color: var(--t4); }
+.uc-top { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; flex-wrap: wrap; }
+.uc-state { font-size: 10px; font-weight: 700; color: var(--green-text); text-transform: uppercase; letter-spacing: .07em; }
+.tag-pill { font-size: 10px; color: var(--t3); border: 1px solid var(--b2); border-radius: 100px; padding: 1px 7px; }
+.uc-date { margin-left: auto; font-size: 11px; color: var(--t3); font-family: var(--mono); }
+.uc-title { font-size: 14px; font-weight: 600; letter-spacing: -.02em; margin-bottom: 5px; }
+.uc-body { font-size: 12.5px; color: var(--t2); line-height: 1.6; }
+.uc-footer { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+.severity-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 100px; }
+.severity-badge.critical { background: var(--red-dim); color: var(--red); }
+.severity-badge.warning { background: var(--amber-dim); color: var(--amber); }
+.severity-badge.info { background: var(--green-dim); color: var(--green-text); }
+.ask-ai-link { font-size: 12px; color: #818cf8; cursor: pointer; margin-left: auto; transition: color .15s; }
+.ask-ai-link:hover { color: #a5b4fc; }
+
+/* DOCS PANE */
+.doc-table { width: 100%; border-collapse: collapse; }
+.doc-table thead th {
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--t3);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  border-bottom: 1px solid var(--b1);
+  background: var(--s2);
+  position: sticky; top: 0; z-index: 1;
+}
+.doc-table tbody tr { cursor: pointer; transition: background .1s; }
+.doc-table tbody tr:hover { background: var(--s3); }
+.doc-table tbody td { padding: 10px 12px; border-bottom: 1px solid var(--b1); font-size: 13px; vertical-align: middle; }
+.doc-name-cell { display: flex; align-items: center; gap: 10px; }
+.doc-ico { width: 30px; height: 30px; border-radius: var(--r2); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.doc-file-name { font-weight: 500; letter-spacing: -.01em; }
+.doc-file-sub { font-size: 11.5px; color: var(--t3); margin-top: 1px; }
+.type-badge { font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 3px; font-family: var(--mono); }
+.type-badge.pdf { background: var(--red-dim); color: var(--red); }
+.type-badge.xlsx { background: var(--green-dim); color: var(--green-text); }
+.type-badge.docx { background: var(--blue-dim); color: var(--blue); }
+
+/* DIRECTORY PANE */
+.dir-table { width: 100%; border-collapse: collapse; }
+.dir-table thead th {
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 11px; font-weight: 600;
+  color: var(--t3); text-transform: uppercase; letter-spacing: .05em;
+  border-bottom: 1px solid var(--b1);
+  background: var(--s2);
+  position: sticky; top: 0; z-index: 1;
+}
+.dir-table tbody tr { cursor: pointer; transition: background .1s; }
+.dir-table tbody tr:hover { background: var(--s3); }
+.dir-table tbody td { padding: 9px 12px; border-bottom: 1px solid var(--b1); font-size: 13px; vertical-align: middle; }
+.person-cell { display: flex; align-items: center; gap: 10px; }
+.person-av {
+  width: 30px; height: 30px; border-radius: var(--r2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; flex-shrink: 0;
+}
+.person-name { font-weight: 500; }
+.person-role { font-size: 11.5px; color: var(--t3); }
+.status-label { display: flex; align-items: center; gap: 5px; font-size: 12px; }
+.sl-dot { width: 7px; height: 7px; border-radius: 50%; }
+.dir-actions { display: flex; gap: 5px; }
+.dir-act-btn {
+  padding: 4px 9px; border: 1px solid var(--b2); border-radius: var(--r1);
+  font-size: 11px; color: var(--t2);
+  background: none; cursor: pointer; transition: all .15s; font-family: var(--font);
+}
+.dir-act-btn:hover { background: var(--s5); color: var(--t1); border-color: var(--b3); }
+.officer-badge {
+  font-size: 10px; font-weight: 600;
+  padding: 2px 7px; border-radius: 100px;
+  background: var(--blue-dim); color: var(--blue);
+  border: 1px solid rgba(46,134,222,.2);
+}
+
+/* ── MODAL ───────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.7);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center; justify-content: center;
+  z-index: 1000;
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: var(--s2);
+  border: 1px solid var(--b2);
+  border-radius: var(--r5);
+  padding: 28px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: var(--elev3);
+}
+.modal-box h3 { font-size: 17px; font-weight: 700; letter-spacing: -.03em; margin-bottom: 6px; }
+.modal-box .modal-sub { font-size: 13px; color: var(--t2); margin-bottom: 20px; line-height: 1.6; }
+.user-list { display: flex; flex-direction: column; gap: 4px; max-height: 260px; overflow-y: auto; margin-bottom: 18px; }
+.user-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px;
+  border: 1px solid var(--b1);
+  border-radius: var(--r3);
+  cursor: pointer;
+  transition: all .15s;
+}
+.user-row:hover { background: var(--s3); border-color: var(--b2); }
+.user-row.checked { background: var(--indigo-dim); border-color: rgba(88,101,242,.3); }
+.ur-av { width: 28px; height: 28px; border-radius: var(--r2); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
+.ur-info { flex: 1; }
+.ur-name { font-size: 13px; font-weight: 500; }
+.ur-sub { font-size: 11px; color: var(--t3); }
+.ur-check {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 1.5px solid var(--b3);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all .15s;
+}
+.user-row.checked .ur-check { background: var(--indigo); border-color: var(--indigo); }
+.modal-actions { display: flex; gap: 8px; }
+.btn-confirm {
+  flex: 1; padding: 10px;
+  background: var(--indigo); color: #fff;
+  border: none; border-radius: var(--r2);
+  font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: background .15s; font-family: var(--font);
+}
+.btn-confirm:hover { background: #6875f5; }
+.btn-cancel {
+  padding: 10px 16px;
+  background: none; color: var(--t2);
+  border: 1px solid var(--b2); border-radius: var(--r2);
+  font-size: 13px; cursor: pointer; transition: all .15s; font-family: var(--font);
+}
+.btn-cancel:hover { background: var(--s4); color: var(--t1); }
+
+/* MISC */
+@keyframes msgIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+.msg-block { animation: msgIn .16s ease; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:0} }
+.ai-cursor { display:inline-block;width:7px;height:13px;background:var(--green);margin-left:2px;vertical-align:middle;animation:blink 1s infinite; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ SETUP ════════════════════════════ -->
+<div id="screen-setup">
+  <div class="setup-wrap">
+    <div class="setup-logo-row">
+      <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
+        <path d="M20 4C20 4 14 10 12 16C10.5 20.5 12 25 16 27C18 28 20 27.5 20 27.5C20 27.5 22 28 24 27C28 25 29.5 20.5 28 16C26 10 20 4 20 4Z" fill="#5DDF2E"/>
+        <path d="M15 22C15 22 16.5 25 20 25.5C23.5 25 25 22 25 22" stroke="#5DDF2E" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".45"/>
+      </svg>
+      <span class="wordmark">Obeymary</span>
+      <span class="version">Enterprise</span>
+    </div>
+    <div class="setup-card">
+      <h1>Connect your Anthropic API key</h1>
+      <p class="sub">Obeymary uses Claude to power the live compliance AI engine. Your key stays in your browser session only — it is never stored or shared.</p>
+      <div class="info-box">
+        <strong>Get a key in 2 minutes:</strong><br>
+        1. Go to <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a><br>
+        2. Sign in → <strong>API Keys</strong> → <strong>Create Key</strong><br>
+        3. Copy it and paste below
+      </div>
+      <div class="form-field">
+        <label>Anthropic API Key</label>
+        <input class="form-input" type="password" id="api-key-input" placeholder="sk-ant-api03-..." onkeydown="if(event.key==='Enter')bootApp()">
+        <div class="form-err" id="key-err-msg"></div>
+      </div>
+      <button class="btn-launch" onclick="bootApp()">Launch Obeymary</button>
+      <div class="setup-demo-link">No key yet? <a onclick="bootDemo()">Continue in demo mode</a> — full UI with simulated AI responses</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ APP ══════════════════════════════ -->
+<div id="app">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="top-logo">
+      <svg width="20" height="20" viewBox="0 0 40 40" fill="none"><path d="M20 4C20 4 14 10 12 16C10.5 20.5 12 25 16 27C18 28 20 27.5 20 27.5C20 27.5 22 28 24 27C28 25 29.5 20.5 28 16C26 10 20 4 20 4Z" fill="#5DDF2E"/></svg>
+      <span class="wm">Obeymary</span>
+    </div>
+    <div class="top-sep"></div>
+    <span class="workspace-label" id="ws-label">Greenlight Corporation</span>
+    <div class="topbar-search">
+      <svg class="search-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input placeholder="Search messages, members, documents...">
+    </div>
+    <div class="t-grow"></div>
+    <select class="top-state-sel" id="top-state-sel" onchange="setGlobalState(this.value)"></select>
+    <div class="api-status" onclick="openModal('modal-key')" id="api-status-btn">
+      <div class="api-dot" id="api-dot"></div>
+      <span id="api-status-label">Live AI</span>
+    </div>
+    <div class="top-avatar" id="top-av" style="background:#5865F2;color:#fff"></div>
+  </div>
+
+  <div class="app-body">
+
+    <!-- RAIL -->
+    <div class="rail">
+      <div class="rail-item active" id="ri-chat" onclick="setRail('chat')" title="Messages">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span class="rl">Chat</span>
+      </div>
+      <div class="rail-item" id="ri-ai" onclick="setRail('ai')" title="AI Compliance Engine">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        <span class="rl">AI</span>
+      </div>
+      <div class="rail-item" id="ri-alerts" onclick="setRail('alerts')" title="Compliance Alerts">
+        <div class="rail-notif" id="rail-alert-badge">5</div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span class="rl">Alerts</span>
+      </div>
+      <div class="rail-div"></div>
+      <div class="rail-item" id="ri-docs" onclick="setRail('docs')" title="Documents">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span class="rl">Docs</span>
+      </div>
+      <div class="rail-item" id="ri-team" onclick="setRail('team')" title="Team Directory">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span class="rl">Team</span>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sb-org">
+        <div class="sb-org-av">G</div>
+        <span class="sb-org-name">Greenlight Corp</span>
+        <svg class="sb-org-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="sb-scroll">
+
+        <!-- Channels -->
+        <div class="sb-section">
+          <div class="sb-sec-header" onclick="toggleSec('channels')">
+            <span class="sb-sec-label">Channels</span>
+            <span class="sb-sec-add" onclick="event.stopPropagation();promptNewChannel()" title="New channel">+</span>
+          </div>
+          <div class="sb-items" id="sec-channels">
+            <div class="sb-row active" data-ch="general" onclick="activateChannel('general','# general','All staff · 24 members',false)">
+              <svg class="sb-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5.5" y1="2" x2="3.5" y2="14"/><line x1="12.5" y1="2" x2="10.5" y2="14"/><line x1="1.5" y1="5.5" x2="14.5" y2="5.5"/><line x1="1.5" y1="10.5" x2="14.5" y2="10.5"/></svg>
+              <span class="sb-name">general</span>
+            </div>
+            <div class="sb-row" data-ch="compliance-ops" onclick="activateChannel('compliance-ops','🛡 compliance-ops','Compliance officers · 8 members',true)">
+              <svg class="sb-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5.5" y1="2" x2="3.5" y2="14"/><line x1="12.5" y1="2" x2="10.5" y2="14"/><line x1="1.5" y1="5.5" x2="14.5" y2="5.5"/><line x1="1.5" y1="10.5" x2="14.5" y2="10.5"/></svg>
+              <span class="sb-name">compliance-ops</span>
+              <span class="sb-unread">3</span>
+            </div>
+            <div class="sb-row" data-ch="nevada" onclick="activateChannel('nevada','📍 nevada-ops','Nevada branch · 11 members',true)">
+              <svg class="sb-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5.5" y1="2" x2="3.5" y2="14"/><line x1="12.5" y1="2" x2="10.5" y2="14"/><line x1="1.5" y1="5.5" x2="14.5" y2="5.5"/><line x1="1.5" y1="10.5" x2="14.5" y2="10.5"/></svg>
+              <span class="sb-name">nevada-ops</span>
+            </div>
+            <div class="sb-row" data-ch="ohio" onclick="activateChannel('ohio','📍 ohio-ops','Ohio branch · 9 members',true)">
+              <svg class="sb-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5.5" y1="2" x2="3.5" y2="14"/><line x1="12.5" y1="2" x2="10.5" y2="14"/><line x1="1.5" y1="5.5" x2="14.5" y2="5.5"/><line x1="1.5" y1="10.5" x2="14.5" y2="10.5"/></svg>
+              <span class="sb-name">ohio-ops</span>
+            </div>
+            <div class="sb-row" data-ch="reg-alerts" onclick="activateChannel('reg-alerts','🔔 regulatory-alerts','Auto-feed · Read-only',false)">
+              <svg class="sb-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5.5" y1="2" x2="3.5" y2="14"/><line x1="12.5" y1="2" x2="10.5" y2="14"/><line x1="1.5" y1="5.5" x2="14.5" y2="5.5"/><line x1="1.5" y1="10.5" x2="14.5" y2="10.5"/></svg>
+              <span class="sb-name">regulatory-alerts</span>
+              <span class="sb-unread">2</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Group Chats -->
+        <div class="sb-section">
+          <div class="sb-sec-header">
+            <span class="sb-sec-label">Group Chats</span>
+            <span class="sb-sec-add" onclick="openNewGroupModal()" title="New group">+</span>
+          </div>
+          <div class="sb-items" id="sec-groups">
+            <div class="sb-row" data-ch="g-pkg" onclick="activateGroup('g-pkg','📦 Packaging Review','5 members',['Casey M.','Spencer L.','Lissa N.','Jordan T.','You'])">
+              <div class="sb-av" style="background:#2E86DE22;color:#2E86DE;border:1px solid #2E86DE33">P</div>
+              <span class="sb-name">Packaging Review</span>
+              <span class="sb-unread">2</span>
+            </div>
+            <div class="sb-row" data-ch="g-mso" onclick="activateGroup('g-mso','🏢 MSO Compliance Leads','6 members',['Casey M.','Spencer L.','Lissa N.','Jordan T.','Marcus W.','You'])">
+              <div class="sb-av" style="background:#5865F222;color:#818cf8;border:1px solid #5865F233">M</div>
+              <span class="sb-name">MSO Compliance Leads</span>
+            </div>
+            <div class="sb-row" data-ch="g-ccb" onclick="activateGroup('g-ccb','🏛 CCB Liaison','3 members',['CCB Officer Kim R.','Spencer L.','You'])">
+              <div class="sb-av" style="background:#D9770622;color:#D97706;border:1px solid #D9770633">C</div>
+              <span class="sb-name">CCB Liaison</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- DMs -->
+        <div class="sb-section">
+          <div class="sb-sec-header">
+            <span class="sb-sec-label">Direct Messages</span>
+            <span class="sb-sec-add" onclick="openNewDMModal()" title="New DM">+</span>
+          </div>
+          <div class="sb-items" id="sec-dms">
+            <div class="sb-row" data-ch="dm-casey" onclick="activateDM('dm-casey','Casey M.','Head of Marketing','#5865F2','CM')">
+              <div class="sb-av" style="background:#5865F2;color:#fff">CM</div>
+              <span class="sb-name">Casey M.</span>
+              <div class="sb-dot on"></div>
+            </div>
+            <div class="sb-row" data-ch="dm-spencer" onclick="activateDM('dm-spencer','Spencer L.','Compliance Director','#E84040','SL')">
+              <div class="sb-av" style="background:#E84040;color:#fff">SL</div>
+              <span class="sb-name">Spencer L.</span>
+              <div class="sb-dot on"></div>
+            </div>
+            <div class="sb-row" data-ch="dm-lissa" onclick="activateDM('dm-lissa','Lissa N.','Nevada Market Lead','#D97706','LN')">
+              <div class="sb-av" style="background:#D97706;color:#fff">LN</div>
+              <span class="sb-name">Lissa N.</span>
+              <div class="sb-dot away"></div>
+            </div>
+            <div class="sb-row" data-ch="dm-ccb" onclick="activateDM('dm-ccb','CCB Officer Kim R.','NV State Compliance Officer','#2E86DE','KR')">
+              <div class="sb-av" style="background:#2E86DE;color:#fff">KR</div>
+              <span class="sb-name">CCB Officer Kim R.</span>
+              <div class="sb-dot away"></div>
+            </div>
+            <div class="sb-row" data-ch="dm-dcc" onclick="activateDM('dm-dcc','DCC Agent Rivera','OH Division Cannabis Control','#5DDF2E','DR')">
+              <div class="sb-av" style="background:#1A4A1A;color:#5DDF2E;border:1px solid #5DDF2E44">DR</div>
+              <span class="sb-name">DCC Agent Rivera</span>
+              <div class="sb-dot off"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="sb-footer">
+        <div class="sb-me">
+          <div class="top-avatar" style="background:#5865F2;color:#fff;width:30px;height:30px;border-radius:6px;font-size:11px;border:none">Y</div>
+          <div class="sb-me-info">
+            <div class="sb-me-name" id="sb-me-name">You</div>
+            <div class="sb-me-role" id="sb-me-role">Marketing Specialist</div>
+          </div>
+          <div class="sb-dot on" style="flex-shrink:0"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+
+      <!-- Channel Header -->
+      <div class="chan-header" id="chan-header">
+        <div class="chan-icon-wrap" id="chan-icon-wrap">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--t3)"><line x1="5.5" y1="2" x2="3.5" y2="14"/><line x1="12.5" y1="2" x2="10.5" y2="14"/><line x1="1.5" y1="5.5" x2="14.5" y2="5.5"/><line x1="1.5" y1="10.5" x2="14.5" y2="10.5"/></svg>
+        </div>
+        <div class="chan-title-block">
+          <div class="chan-title" id="chan-title">general</div>
+          <div class="chan-desc" id="chan-desc">All staff · 24 members</div>
+        </div>
+        <div class="chan-header-actions">
+          <button class="hdr-btn" id="hdr-add-btn" onclick="openAddMemberModal()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+            Add member
+          </button>
+          <button class="hdr-btn hdr-btn-primary" onclick="openAIPane()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83"/></svg>
+            Ask Obeymary AI
+          </button>
+        </div>
+      </div>
+
+      <!-- Participant Strip -->
+      <div class="participant-strip" id="part-strip"></div>
+
+      <!-- PANES -->
+
+      <!-- CHAT PANE -->
+      <div class="pane active" id="pane-chat" style="flex-direction:column">
+        <div class="msg-area">
+          <div class="msg-scroller" id="msg-list"></div>
+        </div>
+        <div class="input-zone">
+          <div class="input-shell">
+            <div class="input-toolbar">
+              <button class="tb-btn" title="Bold" onclick="fmt('**','**')"><b style="font-size:13px;font-family:inherit">B</b></button>
+              <button class="tb-btn" title="Italic" onclick="fmt('_','_')"><i style="font-size:13px;font-family:inherit;font-style:italic">I</i></button>
+              <button class="tb-btn" title="Code" onclick="fmt('`','`')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </button>
+              <div class="tb-sep"></div>
+              <button class="tb-btn" title="Attach" onclick="alert('File upload available in production build with Cloudflare R2')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+              </button>
+              <button class="tb-btn" title="Mention" onclick="insertMention()">@</button>
+            </div>
+            <textarea class="msg-textarea" id="chat-ta" placeholder="Message #general..." rows="1"
+              oninput="taResize(this);updateCharCount(this,'chat-cc')"
+              onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChatMsg()}"></textarea>
+            <div class="input-footer">
+              <div class="if-left">
+                <button class="if-chip" onclick="openAIPaneWithInput()">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4"/></svg>
+                  Ask Obeymary AI
+                </button>
+              </div>
+              <span class="char-ct" id="chat-cc">0 / 4000</span>
+              <button class="send-btn" onclick="sendChatMsg()">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2" fill="white" stroke="none"/></svg>
+                Send
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI PANE -->
+      <div class="pane" id="pane-ai" style="flex-direction:column">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid var(--b1);background:var(--s2);flex-shrink:0">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:13px;font-weight:600;letter-spacing:-.01em">Compliance AI Engine</span>
+            <span style="font-size:11px;color:var(--t3);font-family:var(--mono)">claude-sonnet-4-20250514 · RAG enabled</span>
+          </div>
+          <select style="background:var(--s3);border:1px solid var(--b2);border-radius:var(--r2);color:var(--t2);font-size:12px;padding:4px 8px;outline:none;font-family:var(--font)" id="ai-state-sel" onchange="setAIState(this.value)"></select>
+        </div>
+        <div class="msg-area">
+          <div class="msg-scroller" id="ai-msg-list">
+            <div class="ai-welcome" id="ai-welcome">
+              <svg width="44" height="44" viewBox="0 0 40 40" fill="none"><path d="M20 4C20 4 14 10 12 16C10.5 20.5 12 25 16 27C18 28 20 27.5 20 27.5C20 27.5 22 28 24 27C28 25 29.5 20.5 28 16C26 10 20 4 20 4Z" fill="#5DDF2E" opacity=".9"/></svg>
+              <h2>Compliance AI Agent</h2>
+              <p>Ask any compliance question for your selected state. I'm trained on 2026 regulations, recent bulletins, and enforcement guidance for all 40 legal cannabis states.</p>
+              <div class="sug-grid">
+                <div class="sug-chip" onclick="aiQuickSend(this)">Can we show cannabis consumption in advertising materials?</div>
+                <div class="sug-chip" onclick="aiQuickSend(this)">What are the current packaging requirements for edibles?</div>
+                <div class="sug-chip" onclick="aiQuickSend(this)">What is the advertising buffer zone from schools in our state?</div>
+                <div class="sug-chip" onclick="aiQuickSend(this)">Explain the 2026 METRC reporting requirements in detail.</div>
+                <div class="sug-chip" onclick="aiQuickSend(this)">What employee training is required for dispensary staff?</div>
+                <div class="sug-chip" onclick="aiQuickSend(this)">What changes did SB 56 make to Ohio cannabis law?</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="input-zone">
+          <div class="input-shell">
+            <textarea class="msg-textarea" id="ai-ta" placeholder="Ask a compliance question..." rows="1"
+              oninput="taResize(this)"
+              onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendAIMsg()}"></textarea>
+            <div class="input-footer">
+              <span style="font-size:11.5px;color:var(--t3)">Enter to send · Shift+Enter for new line</span>
+              <button class="send-btn" id="ai-send-btn" onclick="sendAIMsg()">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2" fill="white" stroke="none"/></svg>
+                Send
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ALERTS PANE -->
+      <div class="pane" id="pane-alerts">
+        <div class="pane-search">
+          <div class="search-bar">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--t3)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input placeholder="Filter by state, topic, or keyword..." oninput="filterAlerts(this.value)">
+          </div>
+        </div>
+        <div class="pane-inner" id="alerts-list"></div>
+      </div>
+
+      <!-- DOCS PANE -->
+      <div class="pane" id="pane-docs">
+        <div class="pane-search">
+          <div class="search-bar">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--t3)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input placeholder="Search documents by name, state, or tag...">
+          </div>
+        </div>
+        <div style="flex:1;overflow-y:auto">
+          <table class="doc-table">
+            <thead><tr><th>Document</th><th>State</th><th>Type</th><th>Size</th><th>Updated</th></tr></thead>
+            <tbody id="doc-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TEAM PANE -->
+      <div class="pane" id="pane-team">
+        <div class="pane-search">
+          <div class="search-bar">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--t3)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input placeholder="Search team members and state compliance officers...">
+          </div>
+        </div>
+        <div style="flex:1;overflow-y:auto">
+          <table class="dir-table">
+            <thead><tr><th>Name</th><th>Role</th><th>State(s)</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="team-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-key">
+  <div class="modal-box">
+    <h3>API Key Settings</h3>
+    <p class="modal-sub">Update your Anthropic API key. New keys available at <a href="https://console.anthropic.com" target="_blank" style="color:var(--green-text)">console.anthropic.com</a></p>
+    <div class="form-field"><label>Anthropic API Key</label><input class="form-input" type="password" id="modal-api-key" placeholder="sk-ant-api03-..."></div>
+    <div class="modal-actions">
+      <button class="btn-confirm" onclick="saveModalKey()">Save Key</button>
+      <button class="btn-cancel" onclick="closeModal('modal-key')">Cancel</button>
+      <button class="btn-cancel" onclick="setDemoMode()" style="margin-left:auto">Use Demo</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-add-member">
+  <div class="modal-box">
+    <h3>Add to conversation</h3>
+    <p class="modal-sub">Select team members or state compliance officers to add to <strong id="add-to-label" style="color:var(--t1)">this conversation</strong>.</p>
+    <div class="user-list" id="add-member-user-list"></div>
+    <div class="modal-actions">
+      <button class="btn-confirm" onclick="confirmAddMembers()">Add Selected</button>
+      <button class="btn-cancel" onclick="closeModal('modal-add-member')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-new-group">
+  <div class="modal-box">
+    <h3>New group chat</h3>
+    <p class="modal-sub">Name the group and select members to invite.</p>
+    <div class="form-field"><label>Group Name</label><input class="form-input" id="new-group-name-inp" placeholder="e.g. Q2 Packaging Audit"></div>
+    <div class="form-field"><label>Members</label></div>
+    <div class="user-list" id="new-group-user-list"></div>
+    <div class="modal-actions">
+      <button class="btn-confirm" onclick="createNewGroup()">Create Group</button>
+      <button class="btn-cancel" onclick="closeModal('modal-new-group')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-new-dm">
+  <div class="modal-box">
+    <h3>New direct message</h3>
+    <p class="modal-sub">Select a team member or compliance officer.</p>
+    <div class="user-list" id="new-dm-user-list"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" style="flex:1" onclick="closeModal('modal-new-dm')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════ DATA ═══════════════════════════════════════════ */
+const STATES=[["NV","Nevada","Rec+Med","ccb.nv.gov"],["MO","Missouri","Rec+Med","health.mo.gov/safety/cannabis"],["IL","Illinois","Rec+Med","idfpr.illinois.gov"],["OH","Ohio","Rec+Med","cannabis.ohio.gov"],["CA","California","Rec+Med","cannabis.ca.gov"],["CO","Colorado","Rec+Med","med.colorado.gov"],["MI","Michigan","Rec+Med","michigan.gov/cra"],["AZ","Arizona","Rec+Med","azdhs.gov"],["NY","New York","Rec+Med","cannabis.ny.gov"],["NJ","New Jersey","Rec+Med","njcannabis.gov"],["MA","Massachusetts","Rec+Med","masscannabiscontrol.com"],["WV","West Virginia","Med","omc.wv.gov"],["FL","Florida","Med","knowthefactsmmj.com"],["PA","Pennsylvania","Med","health.pa.gov"],["OK","Oklahoma","Med","omma.us.com"]];
+
+const PEOPLE=[
+  {id:"casey",name:"Casey M.",role:"Head of Marketing",state:"All States",color:"#5865F2",init:"CM",status:"on",officer:false},
+  {id:"spencer",name:"Spencer L.",role:"Compliance Director",state:"All States",color:"#E84040",init:"SL",status:"on",officer:false},
+  {id:"lissa",name:"Lissa N.",role:"Nevada Market Lead",state:"NV",color:"#D97706",init:"LN",status:"away",officer:false},
+  {id:"jordan",name:"Jordan T.",role:"Ohio Operations Manager",state:"OH",color:"#2E86DE",init:"JT",status:"on",officer:false},
+  {id:"marcus",name:"Marcus W.",role:"Illinois Dispensary Manager",state:"IL",color:"#7B62E8",init:"MW",status:"on",officer:false},
+  {id:"tiana",name:"Tiana R.",role:"Missouri Compliance Lead",state:"MO",color:"#16A34A",init:"TR",status:"away",officer:false},
+  {id:"ccb-kim",name:"CCB Officer Kim R.",role:"Nevada Cannabis Compliance Board",state:"NV",color:"#1D4ED8",init:"KR",status:"away",officer:true},
+  {id:"dcc-riv",name:"DCC Agent Rivera",role:"Ohio Division of Cannabis Control",state:"OH",color:"#166534",init:"DR",status:"off",officer:true},
+  {id:"dhss-tor",name:"DHSS Rep Torres",role:"MO Div. of Cannabis Regulation",state:"MO",color:"#7C3AED",init:"AT",status:"off",officer:true},
+];
+
+const DOCS_DATA=[
+  {name:"Nevada CCB Advertising Guidelines 2026",sub:"Q1 update — Rev. 4",state:"NV",type:"PDF",size:"2.4 MB",date:"Mar 10, 2026",color:"#E84040"},
+  {name:"Ohio SB 56 — Full Legislative Text",sub:"Signed Dec 19, 2025",state:"OH",type:"PDF",size:"1.8 MB",date:"Mar 5, 2026",color:"#D97706"},
+  {name:"Illinois METRC Compliance Checklist",sub:"BioTrack migration complete",state:"IL",type:"DOCX",size:"890 KB",date:"Feb 20, 2026",color:"#2E86DE"},
+  {name:"Multi-State Packaging Requirements Matrix 2026",sub:"All 15 states · Verified Mar 2026",state:"All",type:"XLSX",size:"1.2 MB",date:"Mar 1, 2026",color:"#5DDF2E"},
+  {name:"Colorado MED January 2026 Rule Changes",sub:"Employee licensing & surveillance updates",state:"CO",type:"PDF",size:"560 KB",date:"Jan 8, 2026",color:"#7B62E8"},
+  {name:"2026 U.S. Cannabis Compliance Reference",sub:"All 40 legal states · Federal overview",state:"All",type:"PDF",size:"3.8 MB",date:"Mar 11, 2026",color:"#5865F2"},
+  {name:"California AB 8 Compliance Summary",sub:"Hemp integration rules, effective Jan 2026",state:"CA",type:"PDF",size:"720 KB",date:"Feb 28, 2026",color:"#16A34A"},
+];
+
+const ALERTS_DATA=[
+  {state:"OH",title:"SB 56: Intoxicating Hemp Banned Statewide",body:"Governor DeWine signed SB 56 on December 19, 2025. All intoxicating hemp products are now fully prohibited in Ohio — not redirected to licensed dispensaries, banned entirely. Dispensary cap set at 400. Public consumption prohibited. Edibles must remain in original packaging. Effective March 2026.",level:"high",type:"LEGISLATION",tag:"SB 56",date:"Mar 15, 2026",action:true},
+  {state:"CA",title:"AB 8: Hemp Product Restrictions — Action Required",body:"California AB 8 (signed Oct 2, 2025) restricts hemp-derived cannabinoids in food, beverages, and dietary supplements. Key provision effective Jan 1, 2026. Full implementation Jan 1, 2028. Non-compliant products must be removed immediately.",level:"high",type:"LEGISLATION",tag:"AB 8",date:"Mar 12, 2026",action:true},
+  {state:"NV",title:"CCB Surprise Inspections Ramping Up Q1 2026",body:"Nevada CCB has significantly increased unannounced compliance audits at consumption lounges and retail stores. Most cited: inadequate ventilation documentation, age verification gaps, METRC discrepancies >2%. No advance notice is provided.",level:"high",type:"ENFORCEMENT",tag:"Inspections",date:"Mar 10, 2026",action:true},
+  {state:"CO",title:"MED Rules Revised — Effective January 5, 2026",body:"Colorado MED adopted comprehensive rule changes effective Jan 5, 2026. Employee licensing scope narrowed to specific roles. Digital credential system now required. Updated surveillance standards with 40-day retention minimum. Revised recordkeeping timelines.",level:"medium",type:"RULE CHANGE",tag:"MED Rules",date:"Mar 8, 2026",action:true},
+  {state:"IL",title:"METRC Transition: BioTrack No Longer Accepted",body:"Illinois completed the BioTrack → METRC migration on July 1, 2025. Licensees still operating with BioTrack or non-integrated POS systems are in active violation. IDFPR inspectors are specifically auditing METRC integration during all inspections.",level:"medium",type:"TRACKING",tag:"METRC",date:"Mar 5, 2026",action:false},
+  {state:"MO",title:"DHSS Verified Dispensary Initiative — Now Active",body:"Missouri DHSS launched the Verified Dispensary program February 2026. Official decals with QR codes linking to the state registry are being distributed to compliant facilities. Consumer recognition of the decals is increasing rapidly.",level:"low",type:"PROGRAM",tag:"Initiative",date:"Mar 2, 2026",action:false},
+];
+
+/* ═══════════════ SEEDED MESSAGES ═══════════════════════════════ */
+const SEEDED={
+  "general":[
+    {auth:"Casey M.",init:"CM",col:"#5865F2",text:"Good morning. Reminder — Ohio **SB 56** goes into effect this month. All OH locations need to confirm intoxicating hemp is off shelves before Monday. Spencer shared the full checklist in #compliance-ops.",time:"9:12 AM",first:true},
+    {auth:"Spencer L.",init:"SL",col:"#E84040",text:"Confirmed. This is **not optional** — DCC has already issued citations at two competitor stores in Columbus. DM me if your location has edge cases.",time:"9:18 AM",first:true},
+    {auth:"Jordan T.",init:"JT",col:"#2E86DE",text:"Ohio stores are pulling SKUs today. Will confirm by EOD.",time:"9:44 AM",first:true},
+    {auth:"Lissa N.",init:"LN",col:"#D97706",text:"Nevada is clear. CCB Officer Kim confirmed our inventory audit last week. All five NV locations are compliant.",time:"10:02 AM",first:true},
+  ],
+  "compliance-ops":[
+    {auth:"Spencer L.",init:"SL",col:"#E84040",text:"Packaging audit complete for NV, MO, and IL. Ohio and CA still in progress. Matrix is updated in Documents.",time:"Yesterday 4:30 PM",first:true},
+    {auth:"Lissa N.",init:"LN",col:"#D97706",text:"CCB sent updated advertising guidelines this morning. Key change: no more third-party endorsement language on social. I've uploaded the PDF to Documents.",time:"Yesterday 5:10 PM",first:true},
+    {auth:"You",init:"Y",col:"#5865F2",text:"Got it — updating NV social templates tonight and will share for review by tomorrow morning.",time:"Yesterday 5:15 PM",first:true,isMe:true},
+  ],
+  "g-ccb":[
+    {auth:"CCB Officer Kim R.",init:"KR",col:"#1D4ED8",text:"Good afternoon. Following up on the Paradise store advertising inquiry from February 14. We have reviewed the submitted materials against NCCR 12.060. No violations found — no further action required for that location.",time:"Mar 10, 2:18 PM",first:true,officer:true},
+    {auth:"Spencer L.",init:"SL",col:"#E84040",text:"Thank you Officer Kim. We appreciate the quick resolution. We'll keep this thread open as our primary channel for NV compliance inquiries going forward.",time:"Mar 10, 2:26 PM",first:true},
+    {auth:"You",init:"Y",col:"#5865F2",text:"Thank you. I'll document this confirmation in our compliance log.",time:"Mar 10, 2:29 PM",first:true,isMe:true},
+  ],
+};
+
+/* ═══════════════ STATE ═══════════════════════════════════════════ */
+let API_KEY=null,IS_DEMO=false;
+let GLOBAL_STATE="NV",AI_STATE="NV";
+let AI_LOADING=false,AI_HISTORY=[];
+let CURRENT_CH="general";
+let CH_MEMBERS={general:["You","Casey M.","Spencer L.","Lissa N.","Jordan T.","Marcus W.","Tiana R."],"compliance-ops":["You","Spencer L.","Lissa N.","Jordan T."],"nevada":["You","Lissa N.","CCB Officer Kim R."],"ohio":["You","Jordan T.","DCC Agent Rivera"],"reg-alerts":["System"],"g-pkg":["You","Casey M.","Spencer L.","Lissa N.","Jordan T."],"g-mso":["You","Casey M.","Spencer L.","Lissa N.","Jordan T.","Marcus W."],"g-ccb":["You","CCB Officer Kim R.","Spencer L."],"dm-casey":["You","Casey M."],"dm-spencer":["You","Spencer L."],"dm-lissa":["You","Lissa N."],"dm-ccb":["You","CCB Officer Kim R."],"dm-dcc":["You","DCC Agent Rivera"]};
+let PENDING_ADD_IDS=[];
+
+/* ═══════════════ BOOT ═══════════════════════════════════════════ */
+function bootApp(){
+  const k=document.getElementById('api-key-input').value.trim();
+  const e=document.getElementById('key-err-msg');
+  if(!k){e.textContent='Please enter your API key.';e.style.display='block';return;}
+  if(!k.startsWith('sk-ant')){e.textContent='Anthropic keys begin with sk-ant- — please check and try again.';e.style.display='block';return;}
+  API_KEY=k;IS_DEMO=false;go();
+}
+function bootDemo(){API_KEY=null;IS_DEMO=true;go();}
+function go(){
+  document.getElementById('screen-setup').style.display='none';
+  document.getElementById('app').style.display='flex';
+  buildStateSels();
+  updateAPIStatusUI();
+  renderTeam();
+  renderDocs();
+  renderAlerts();
+  activateChannel('general','# general','All staff · 24 members',false);
+}
+
+/* ═══════════════ STATE SELECTS ══════════════════════════════════ */
+function buildStateSels(){
+  ['top-state-sel','ai-state-sel'].forEach(id=>{
+    const s=document.getElementById(id);s.innerHTML='';
+    STATES.forEach(([c,n])=>{const o=document.createElement('option');o.value=c;o.textContent=n+' ('+c+')';s.appendChild(o);});
+    s.value='NV';
+  });
+}
+function setGlobalState(v){GLOBAL_STATE=v;document.getElementById('ai-state-sel').value=v;AI_STATE=v;}
+function setAIState(v){AI_STATE=v;document.getElementById('top-state-sel').value=v;GLOBAL_STATE=v;}
+
+/* ═══════════════ RAIL ══════════════════════════════════════════ */
+function setRail(id){
+  document.querySelectorAll('.rail-item').forEach(r=>r.classList.remove('active'));
+  document.getElementById('ri-'+id).classList.add('active');
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+  document.getElementById('pane-'+id).classList.add('active');
+  const showChanHdr=id==='chat';
+  document.getElementById('chan-header').style.display=showChanHdr?'flex':'none';
+  document.getElementById('part-strip').style.display=showChanHdr?'':'none';
+  if(id==='alerts')document.getElementById('rail-alert-badge').style.display='none';
+}
+
+/* ═══════════════ CHANNEL ACTIVATION ════════════════════════════ */
+function activateChannel(id,title,desc,showMembers){
+  CURRENT_CH=id;
+  setActive(id);
+  setRail('chat');
+  setHeaderText(title,desc,true);
+  renderParticipants(showMembers?CH_MEMBERS[id]:[]);
+  renderChannelMsgs(id);
+  document.getElementById('chat-ta').placeholder='Message '+title+'...';
+}
+function activateGroup(id,title,desc,members){
+  CURRENT_CH=id;CH_MEMBERS[id]=members;
+  setActive(id);setRail('chat');
+  setHeaderText(title,desc,true);
+  renderParticipants(members);
+  renderChannelMsgs(id);
+  document.getElementById('chat-ta').placeholder='Message '+title.split(' ').slice(1).join(' ')+'...';
+}
+function activateDM(id,name,role,col,init){
+  CURRENT_CH=id;CH_MEMBERS[id]=['You',name];
+  setActive(id);setRail('chat');
+  const iconHtml=`<div style="width:28px;height:28px;border-radius:6px;background:${col};color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">${init}</div>`;
+  document.getElementById('chan-icon-wrap').innerHTML=iconHtml;
+  document.getElementById('chan-title').textContent=name;
+  document.getElementById('chan-desc').textContent=role;
+  document.getElementById('hdr-add-btn').style.display='none';
+  renderParticipants([]);
+  renderChannelMsgs(id);
+  document.getElementById('chat-ta').placeholder='Message '+name+'...';
+}
+function setHeaderText(title,desc,showAddBtn){
+  document.getElementById('chan-icon-wrap').innerHTML=`<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--t3)"><line x1="5.5" y1="2" x2="3.5" y2="14"/><line x1="12.5" y1="2" x2="10.5" y2="14"/><line x1="1.5" y1="5.5" x2="14.5" y2="5.5"/><line x1="1.5" y1="10.5" x2="14.5" y2="10.5"/></svg>`;
+  document.getElementById('chan-title').textContent=title;
+  document.getElementById('chan-desc').textContent=desc;
+  document.getElementById('hdr-add-btn').style.display=showAddBtn?'flex':'none';
+}
+function setActive(id){
+  document.querySelectorAll('.sb-row').forEach(r=>r.classList.remove('active'));
+  const el=document.querySelector('.sb-row[data-ch="'+id+'"]');
+  if(el)el.classList.add('active');
+}
+
+function renderParticipants(members){
+  const strip=document.getElementById('part-strip');
+  if(!members||members.length===0){strip.classList.remove('visible');return;}
+  strip.classList.add('visible');
+  strip.innerHTML=`<span class="part-label">${members.length} members</span>`;
+  const pcolors={"Casey M.":"#5865F2","Spencer L.":"#E84040","Lissa N.":"#D97706","Jordan T.":"#2E86DE","Marcus W.":"#7B62E8","Tiana R.":"#16A34A","CCB Officer Kim R.":"#1D4ED8","DCC Agent Rivera":"#166534","DHSS Rep Torres":"#7C3AED","You":"#5865F2"};
+  const pstatus={"Casey M.":"on","Spencer L.":"on","Lissa N.":"away","Jordan T.":"on","Marcus W.":"on","Tiana R.":"away","CCB Officer Kim R.":"away","DCC Agent Rivera":"off","DHSS Rep Torres":"off","You":"on"};
+  members.forEach(m=>{
+    const col=pcolors[m]||'#5865F2';
+    const stat=pstatus[m]||'off';
+    const statCol=stat==='on'?'var(--green)':stat==='away'?'var(--amber)':'var(--t4)';
+    const init=m==='You'?'Y':m.split(' ').map(w=>w[0]).join('').slice(0,2);
+    const av=document.createElement('div');av.className='part-av';
+    av.style.cssText=`background:${col};color:#fff`;
+    av.textContent=init;av.title=m;
+    av.innerHTML+=`<div class="status-ring" style="background:${statCol}"></div>`;
+    strip.appendChild(av);
+  });
+  const addBtn=document.createElement('div');addBtn.className='part-add';addBtn.textContent='+';addBtn.title='Add member';addBtn.onclick=openAddMemberModal;
+  strip.appendChild(addBtn);
+}
+
+/* ═══════════════ MESSAGES ════════════════════════════════════════ */
+function renderChannelMsgs(id){
+  const list=document.getElementById('msg-list');list.innerHTML='';
+  const msgs=SEEDED[id]||[];
+  if(!msgs.length){
+    list.innerHTML=`<div class="empty-channel"><div class="ec-icon">#</div><h3>Start the conversation</h3><p>This is the beginning of this channel or conversation.</p></div>`;
+    return;
+  }
+  const dp=document.createElement('div');dp.className='date-pill';dp.textContent='Today';list.appendChild(dp);
+  let prev='';
+  msgs.forEach(m=>{appendMsg(list,m,m.auth!==prev);prev=m.auth;});
+  list.parentElement.scrollTop=9999;
+}
+
+function appendMsg(container,m,showAv=true){
+  const wrap=document.createElement('div');
+  wrap.style.position='relative';
+  wrap.className='msg-block'+(showAv?' first-in-group':'');
+  const col=m.col||'#5865F2';
+  const avHtml=showAv?`<div class="msg-av-col"><div class="msg-av" style="background:${col};color:#fff">${m.init||'?'}</div></div>`:'<div class="msg-av-ghost"></div>';
+  let badges='';
+  if(m.officer)badges+=`<span class="role-tag state-officer">State Officer</span>`;
+  if(m.isMe)badges+=`<span class="role-tag you">You</span>`;
+  if(m.isAI)badges+=`<span class="role-tag ai">Obeymary AI</span>`;
+  const metaHtml=showAv?`<div class="msg-header"><span class="msg-author">${esc(m.auth)}</span>${badges}<span class="msg-time">${m.time}</span></div>`:'';
+  const bodyHtml=m.isCard?renderComplianceCard(m):`<div class="msg-text">${mdToHtml(m.text)}</div>`;
+  wrap.innerHTML=`${avHtml}<div class="msg-body">${metaHtml}${bodyHtml}</div><div class="msg-actions-row"><button class="msg-action" title="React">☺</button><button class="msg-action" title="Reply">↩</button><button class="msg-action" title="More">⋯</button></div>`;
+  container.appendChild(wrap);
+}
+
+function renderComplianceCard(m){
+  return`<div class="compliance-response"><div class="cr-header"><span class="cr-state-badge">${m.state||AI_STATE}</span>${m.rule?`<span class="cr-rule">${m.rule}</span>`:''}</div><div class="cr-content">${mdToHtml(m.text)}</div><div class="cr-footer"><span class="cr-source">Verify: <a href="https://${m.source||getRegUrl()}" target="_blank">${m.source||getRegUrl()}</a></span><div class="cr-actions"><button class="cr-btn" onclick="postToChannel(this)">Post to channel</button><button class="cr-btn">Save to Docs</button></div></div></div>`;
+}
+
+/* ═══════════════ SEND CHAT MSG ══════════════════════════════════ */
+function sendChatMsg(){
+  const ta=document.getElementById('chat-ta');
+  const text=ta.value.trim();if(!text)return;
+  const now=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  const msg={auth:'You',init:'Y',col:'#5865F2',text,time:now,isMe:true};
+  if(!SEEDED[CURRENT_CH])SEEDED[CURRENT_CH]=[];
+  const prev=SEEDED[CURRENT_CH];
+  const showAv=!prev.length||prev[prev.length-1].auth!=='You';
+  SEEDED[CURRENT_CH].push(msg);
+  const list=document.getElementById('msg-list');
+  appendMsg(list,msg,showAv);
+  list.parentElement.scrollTop=9999;
+  ta.value='';ta.style.height='auto';
+  document.getElementById('chat-cc').textContent='0 / 4000';
+}
+
+/* ═══════════════ AI ENGINE ══════════════════════════════════════ */
+function openAIPane(){setRail('ai');}
+function openAIPaneWithInput(){
+  const t=document.getElementById('chat-ta').value.trim();
+  setRail('ai');
+  if(t){document.getElementById('ai-ta').value=t;sendAIMsg();}
+}
+function aiQuickSend(el){
+  document.getElementById('ai-ta').value=el.textContent.replace('→ ','').trim();
+  sendAIMsg();
+}
+
+async function sendAIMsg(){
+  const ta=document.getElementById('ai-ta');
+  const text=ta.value.trim();if(!text||AI_LOADING)return;
+  AI_LOADING=true;
+  document.getElementById('ai-send-btn').disabled=true;
+  document.getElementById('ai-welcome').style.display='none';
+  ta.value='';ta.style.height='auto';
+  AI_HISTORY.push({role:'user',content:text});
+  const list=document.getElementById('ai-msg-list');
+  const now=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  appendMsg(list,{auth:'You',init:'Y',col:'#5865F2',text,time:now,isMe:true},true);
+
+  const s=STATES.find(([c])=>c===AI_STATE);
+  const sname=s?s[1]:AI_STATE,stype=s?s[2]:'',surl=s?s[3]:'';
+
+  const typWrap=document.createElement('div');typWrap.style.position='relative';
+  typWrap.className='msg-block first-in-group';
+  typWrap.innerHTML=`<div class="msg-av-col"><div class="msg-av" style="background:#1a2a1a;color:#5DDF2E;border:1px solid #5DDF2E33">AI</div></div><div class="msg-body"><div class="msg-header"><span class="msg-author" style="color:var(--green-text)">Obeymary</span><span class="role-tag ai">AI · ${sname}</span><span class="msg-time">${now}</span></div><div class="typing-indicator"><div class="typing-dots"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div><span>Analyzing ${sname} regulations...</span></div></div>`;
+  list.appendChild(typWrap);list.parentElement.scrollTop=9999;
+
+  let full='';let bubble=null;
+  const body=typWrap.querySelector('.msg-body');
+  const makeB=()=>{if(bubble)return;body.querySelector('.typing-indicator').remove();bubble=document.createElement('div');bubble.className='msg-text';body.appendChild(bubble);};
+
+  const sys=`You are Obeymary, an enterprise cannabis compliance AI for ${sname} (${AI_STATE}).
+Program: ${stype} · Date: March 2026 · Regulator: ${getRegulator(AI_STATE)} · Official: ${surl}
+Provide precise, actionable compliance guidance. Cite specific rule numbers when known.
+Format responses with **bold** key terms, bullet lists, and headers where appropriate.
+Include the official source URL at the end. Note if rules may have changed recently.
+Never provide legal advice — compliance guidance only.`;
+
+  if(IS_DEMO){
+    await new Promise(r=>setTimeout(r,1300));
+    full=demoResponse(text,sname);makeB();bubble.innerHTML=mdToHtml(full);
+  } else {
+    try{
+      const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1200,system:sys,messages:AI_HISTORY.slice(-14),stream:true})});
+      if(!res.ok){const e=await res.json();throw new Error(e.error?.message||'Error '+res.status);}
+      const reader=res.body.getReader();const dec=new TextDecoder();
+      while(true){
+        const{done,value}=await reader.read();if(done)break;
+        for(const line of dec.decode(value).split('\n').filter(l=>l.startsWith('data: '))){
+          try{const d=JSON.parse(line.slice(6));if(d.type==='content_block_delta'&&d.delta?.text){full+=d.delta.text;makeB();bubble.innerHTML=mdToHtml(full)+'<span class="ai-cursor"></span>';list.parentElement.scrollTop=9999;}}catch{}
+        }
+      }
+      if(bubble)bubble.innerHTML=mdToHtml(full);
+    }catch(e){makeB();bubble.innerHTML=`<span style="color:var(--red)">Error: ${esc(e.message)}</span> — Check your API key or switch to demo mode.`;}
+  }
+  AI_HISTORY.push({role:'assistant',content:full});
+  list.parentElement.scrollTop=9999;
+  AI_LOADING=false;document.getElementById('ai-send-btn').disabled=false;ta.focus();
+}
+
+function demoResponse(q,state){
+  const lq=q.toLowerCase();
+  if(lq.includes('sb 56')||lq.includes('ohio hemp'))return`**Ohio SB 56 — Signed December 19, 2025 (Effective March 2026)**\n\n**What changed:**\n- All intoxicating hemp products are **fully prohibited** in Ohio — this is a statewide ban, not a redirection to dispensaries\n- Products containing delta-8, delta-10, THCA, HHC, THC-P, and other synthetic or semi-synthetic cannabinoids are banned in all retail channels\n- Dispensary cap set at **400 statewide**\n- Public consumption explicitly prohibited\n- Edibles must remain in original child-resistant packaging at all times\n\n**Required immediate actions:**\n- Remove all intoxicating hemp products from shelves immediately\n- Audit supplier contracts for non-compliant SKUs\n- Update POS systems to flag any remaining intoxicating hemp inventory\n- Retrain staff on the new product category restrictions\n\n**Penalties:** License suspension or revocation for selling to minors. DCC has already issued citations at multiple Columbus-area stores.\n\nVerify: **cannabis.ohio.gov** | Division of Cannabis Control (DMC, formerly DCC)`;
+  if(lq.includes('consumption')||lq.includes('advertising')||lq.includes('marketing'))return`**Consumption imagery in advertising — ${state}**\n\n**Generally prohibited:**\n- Any depiction of a person consuming, smoking, vaping, dabbing, or ingesting cannabis\n- Content that portrays or encourages intoxication or impairment\n- Imagery that could normalize consumption to minors\n- Unsubstantiated health or wellness claims\n\n**What is permitted:**\n- Licensed product photography (within packaging, on approved surfaces)\n- Dispensary exterior and interior brand imagery\n- Brand wordmarks, logos, and abstract design elements\n- Educational content about responsible adult use (with mandatory disclaimers)\n- Verified age-gated digital advertising platforms\n\n**Required disclosures (all advertising):**\n> *"For use only by adults 21 years of age and older. Keep out of reach of children."*\n\n**Buffer zones:** Advertising may not target audiences within 1,000 ft of schools, playgrounds, or daycares (varies by state and municipality).\n\nAlways have legal counsel review finalized materials before publication.\n\nVerify: **${getRegUrl()}**`;
+  if(lq.includes('packaging'))return`**Packaging Requirements — ${state} (2026)**\n\n**Structural requirements:**\n- **Child-resistant** per PPPA 16 CFR 1700.20 — must pass child-resistance testing\n- **Opaque** — product must not be visible through packaging\n- **Tamper-evident** seal on all units\n- **Resealable** for multi-serving products\n\n**Mandatory label elements:**\n- Licensed producer name and state license number\n- Product name, form (flower, concentrate, edible, etc.)\n- Batch/lot number traceable to METRC\n- Net weight or volume\n- Total THC and CBD in mg per serving AND total mg per package\n- Serving size and number of servings\n- Laboratory name, test date, and certificate of analysis QR code\n- Packaging date and best-by date\n- State universal THC symbol (triangle with exclamation mark)\n- All state-mandated health and safety warnings\n- Producer address\n\n**Prohibited:**\n- Imagery resembling commercial food or beverage brands\n- Cartoon characters or imagery designed to appeal to minors\n- Any health claim not approved by the FDA\n\nVerify: **${getRegUrl()}**`;
+  if(lq.includes('metrc')||lq.includes('seed-to-sale')||lq.includes('tracking'))return`**METRC Compliance Requirements — 2026**\n\n**Core obligations:**\n- All plant movements, harvests, transfers, and retail sales must be logged in **real time**\n- POS system requires a certified METRC API integration — manual batch entry alone creates compliance gaps\n- Each package tag is unique and cannot be reused\n\n**2026 state-specific updates:**\n- **Illinois:** BioTrack fully deprecated July 1, 2025. METRC only. Non-integrated POS = active violation.\n- **Colorado:** New rules Jan 5, 2026 — updated reconciliation requirements, digital credential integration\n- **Ohio:** DCC actively auditing METRC reconciliation accuracy; >2% variance must be reported within 24 hours\n- **Nevada:** CCB increasing METRC audit frequency in 2026\n\n**Reporting deadlines:**\n- Quarterly inventory counts: due 30 days after quarter end\n- Monthly activity reports: due 30 days after month end\n- Discrepancies >2%: document and report within 24 hours\n- Transfer manifests: must be accepted in METRC within 24 hours of delivery\n\n**Integration checklist:**\n- POS is METRC-certified ✓\n- All employees have active METRC accounts ✓\n- API key not expired ✓\n- Inventory reconciliation current ✓\n\nVerify: **metrc.com** → State Resources → [Your State]`;
+  if(lq.includes('employee')||lq.includes('training')||lq.includes('staff'))return`**Employee Requirements — ${state}**\n\n**Licensing:**\n- All dispensary employees must hold a valid state agent/employee registration\n- Applications submitted through the state licensing portal\n- Background checks required — disqualifying offenses vary by state\n- Renewal periods vary: typically annual or biennial\n\n**Required training:**\n- Responsible vendor / responsible cannabis use training (typically 4–8 hours)\n- Age verification procedures (must verify ID for every customer, every transaction)\n- Product knowledge: effects, dosing, contraindications\n- Diversion prevention and reporting procedures\n- METRC / seed-to-sale tracking procedures\n\n**2026 training updates (Colorado specifically):**\n- Employee licensing scope narrowed under Jan 5, 2026 MED rules\n- Digital credentials now required — physical badges being phased out\n- Updated training modules for digital identity verification\n\n**Documentation:**\n- Maintain training records for minimum 2 years\n- Records must be available during inspection — digital or physical\n- Termination notices must be filed in METRC within 24 hours of employee departure\n\nVerify: **${getRegUrl()}**`;
+  return`**Compliance Guidance — ${state} (March 2026)**\n\nBased on current 2026 regulations for ${state}:\n\n- Licensed operations must maintain seed-to-sale tracking via METRC (or state equivalent)\n- All advertising must comply with state buffer zone and content restrictions\n- Packaging must meet child-resistant, opaque, and labeling standards\n- Employee licensing and training requirements must be current\n- Physical and digital records must be maintained for minimum 2 years\n\n**For your specific question**, I recommend verifying directly with:\n**${getRegulator(AI_STATE)}**\n\nWould you like more detail on any specific aspect of ${state} compliance?`;
+}
+
+/* ═══════════════ RENDER FUNCTIONS ══════════════════════════════ */
+function renderAlerts(filter=''){
+  const c=document.getElementById('alerts-list');c.innerHTML='';
+  const items=filter?ALERTS_DATA.filter(a=>a.title.toLowerCase().includes(filter)||a.body.toLowerCase().includes(filter)||a.state.toLowerCase().includes(filter)):ALERTS_DATA;
+  items.forEach(a=>{
+    const el=document.createElement('div');el.className='update-card '+a.level;
+    const sev=a.level==='high'?'critical':a.level==='medium'?'warning':'info';
+    const sevLabel=a.action?'⚡ Action Required':'ℹ Informational';
+    el.innerHTML=`<div class="uc-top"><span class="uc-state">${a.state}</span><span class="tag-pill">${a.type}</span><span class="tag-pill">${a.tag}</span><span class="uc-date">${a.date}</span></div><div class="uc-title">${esc(a.title)}</div><div class="uc-body">${esc(a.body)}</div><div class="uc-footer"><span class="severity-badge ${sev}">${sevLabel}</span><span class="ask-ai-link" onclick="askAbout('${esc(a.title)}')">Ask AI →</span></div>`;
+    c.appendChild(el);
+  });
+}
+function filterAlerts(v){renderAlerts(v.toLowerCase());}
+function askAbout(title){setRail('ai');document.getElementById('ai-ta').value='Explain this update and its impact on our operations: "'+title+'"';sendAIMsg();}
+
+function renderDocs(){
+  const tb=document.getElementById('doc-tbody');tb.innerHTML='';
+  DOCS_DATA.forEach(d=>{
+    const tr=document.createElement('tr');
+    const typClass=d.type==='PDF'?'pdf':d.type==='XLSX'?'xlsx':'docx';
+    tr.innerHTML=`<td><div class="doc-name-cell"><div class="doc-ico" style="background:${d.color}18;border:1px solid ${d.color}30">${d.type==='PDF'?'📋':d.type==='XLSX'?'📊':'📝'}</div><div><div class="doc-file-name">${esc(d.name)}</div><div class="doc-file-sub">${esc(d.sub)}</div></div></div></td><td style="color:var(--t2)">${d.state}</td><td><span class="type-badge ${typClass}">${d.type}</span></td><td style="color:var(--t3);font-family:var(--mono);font-size:12px">${d.size}</td><td style="color:var(--t3);font-family:var(--mono);font-size:12px">${d.date}</td>`;
+    tb.appendChild(tr);
+  });
+}
+
+function renderTeam(){
+  const tb=document.getElementById('team-tbody');tb.innerHTML='';
+  PEOPLE.forEach(p=>{
+    const statColor=p.status==='on'?'var(--green)':p.status==='away'?'var(--amber)':'var(--t4)';
+    const statLabel=p.status==='on'?'Online':p.status==='away'?'Away':'Offline';
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td><div class="person-cell"><div class="person-av" style="background:${p.color};color:#fff">${p.init}</div><div><div class="person-name">${esc(p.name)}${p.officer?` <span class="officer-badge">State Officer</span>`:''}</div></div></div></td><td style="color:var(--t2)">${esc(p.role)}</td><td style="color:var(--t2)">${p.state}</td><td><div class="status-label"><div class="sl-dot" style="background:${statColor}"></div>${statLabel}</div></td><td><div class="dir-actions"><button class="dir-act-btn" onclick="activateDM('dm-${p.id}','${p.name}','${p.role}','${p.color}','${p.init}')">Message</button><button class="dir-act-btn" onclick="openAddMemberModal()">Add to chat</button></div></td>`;
+    tb.appendChild(tr);
+  });
+}
+
+/* ═══════════════ MODALS ════════════════════════════════════════ */
+function openAddMemberModal(){
+  document.getElementById('add-to-label').textContent=document.getElementById('chan-title').textContent;
+  const list=document.getElementById('add-member-user-list');list.innerHTML='';PENDING_ADD_IDS=[];
+  const existing=CH_MEMBERS[CURRENT_CH]||[];
+  PEOPLE.filter(p=>!existing.includes(p.name)).forEach(p=>{
+    const row=document.createElement('div');row.className='user-row';
+    row.innerHTML=`<div class="ur-av" style="background:${p.color};color:#fff">${p.init}</div><div class="ur-info"><div class="ur-name">${esc(p.name)}${p.officer?` <span class="officer-badge">State Officer</span>`:''}</div><div class="ur-sub">${esc(p.role)} · ${p.state}</div></div><div class="ur-check"></div>`;
+    row.onclick=()=>{row.classList.toggle('checked');if(row.classList.contains('checked'))PENDING_ADD_IDS.push(p.name);else PENDING_ADD_IDS=PENDING_ADD_IDS.filter(x=>x!==p.name);};
+    list.appendChild(row);
+  });
+  openModal('modal-add-member');
+}
+function confirmAddMembers(){
+  if(!PENDING_ADD_IDS.length){closeModal('modal-add-member');return;}
+  if(!CH_MEMBERS[CURRENT_CH])CH_MEMBERS[CURRENT_CH]=[];
+  CH_MEMBERS[CURRENT_CH].push(...PENDING_ADD_IDS);
+  renderParticipants(CH_MEMBERS[CURRENT_CH]);
+  const sysmsg=document.createElement('div');sysmsg.className='system-msg';
+  sysmsg.textContent=PENDING_ADD_IDS.join(', ')+' was added to this conversation.';
+  document.getElementById('msg-list').appendChild(sysmsg);
+  document.querySelector('.msg-area').scrollTop=9999;
+  closeModal('modal-add-member');
+}
+function openNewGroupModal(){
+  const list=document.getElementById('new-group-user-list');list.innerHTML='';
+  PEOPLE.forEach(p=>{
+    const row=document.createElement('div');row.className='user-row';
+    row.innerHTML=`<div class="ur-av" style="background:${p.color};color:#fff">${p.init}</div><div class="ur-info"><div class="ur-name">${esc(p.name)}${p.officer?` <span class="officer-badge">State Officer</span>`:''}</div><div class="ur-sub">${esc(p.role)}</div></div><div class="ur-check"></div>`;
+    row.onclick=()=>row.classList.toggle('checked');list.appendChild(row);
+  });
+  openModal('modal-new-group');
+}
+function createNewGroup(){
+  const name=document.getElementById('new-group-name-inp').value.trim();if(!name)return;
+  const sel=Array.from(document.querySelectorAll('#new-group-user-list .user-row.checked')).map(r=>r.querySelector('.ur-name').textContent.replace('State Officer','').trim());
+  const members=['You',...sel];
+  const id='g-'+Date.now();
+  const sb=document.getElementById('sec-groups');
+  const row=document.createElement('div');row.className='sb-row';row.setAttribute('data-ch',id);
+  row.innerHTML=`<div class="sb-av" style="background:var(--indigo);color:#fff">${name[0]}</div><span class="sb-name">${esc(name)}</span>`;
+  row.onclick=()=>activateGroup(id,'💬 '+name,members.length+' members',members);
+  sb.appendChild(row);
+  closeModal('modal-new-group');
+  activateGroup(id,'💬 '+name,members.length+' members',members);
+}
+function openNewDMModal(){
+  const list=document.getElementById('new-dm-user-list');list.innerHTML='';
+  PEOPLE.forEach(p=>{
+    const row=document.createElement('div');row.className='user-row';
+    const statCol=p.status==='on'?'var(--green)':p.status==='away'?'var(--amber)':'var(--t4)';
+    row.innerHTML=`<div class="ur-av" style="background:${p.color};color:#fff">${p.init}</div><div class="ur-info"><div class="ur-name">${esc(p.name)}${p.officer?` <span class="officer-badge">State Officer</span>`:''}</div><div class="ur-sub">${esc(p.role)} · ${p.state}</div></div><div style="width:8px;height:8px;border-radius:50%;background:${statCol};flex-shrink:0"></div>`;
+    row.onclick=()=>{closeModal('modal-new-dm');activateDM('dm-'+p.id,p.name,p.role,p.color,p.init);};
+    list.appendChild(row);
+  });
+  openModal('modal-new-dm');
+}
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+function saveModalKey(){const k=document.getElementById('modal-api-key').value.trim();if(k&&k.startsWith('sk-ant')){API_KEY=k;IS_DEMO=false;updateAPIStatusUI();closeModal('modal-key');}else alert('Please enter a valid Anthropic key.');}
+function setDemoMode(){API_KEY=null;IS_DEMO=true;updateAPIStatusUI();closeModal('modal-key');}
+function updateAPIStatusUI(){const dot=document.getElementById('api-dot'),lbl=document.getElementById('api-status-label');if(IS_DEMO){dot.className='api-dot demo';lbl.textContent='Demo Mode';}else{dot.className='api-dot live';lbl.textContent='Live AI';}}
+function promptNewChannel(){const n=prompt('Channel name:');if(!n)return;const id='ch-'+n.toLowerCase().replace(/\s+/g,'-');const s=document.getElementById('sec-channels');const row=document.createElement('div');row.className='sb-row';row.setAttribute('data-ch',id);row.innerHTML=`<svg class="sb-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5.5" y1="2" x2="3.5" y2="14"/><line x1="12.5" y1="2" x2="10.5" y2="14"/><line x1="1.5" y1="5.5" x2="14.5" y2="5.5"/><line x1="1.5" y1="10.5" x2="14.5" y2="10.5"/></svg><span class="sb-name">${esc(n)}</span>`;row.onclick=()=>activateChannel(id,'# '+n,'New channel',false);s.appendChild(row);activateChannel(id,'# '+n,'New channel',false);}
+
+/* ═══════════════ UTILS ══════════════════════════════════════════ */
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function taResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,140)+'px';}
+function updateCharCount(el,id){document.getElementById(id).textContent=el.value.length+' / 4000';}
+function insertMention(){const ta=document.getElementById('chat-ta');ta.value+='@';ta.focus();}
+function fmt(pre,post){const ta=document.getElementById('chat-ta');const s=ta.selectionStart,e=ta.selectionEnd;const sel=ta.value.slice(s,e)||'text';ta.value=ta.value.slice(0,s)+pre+sel+post+ta.value.slice(e);ta.focus();}
+function postToChannel(){setRail('chat');}
+function getRegUrl(){return STATES.find(([c])=>c===AI_STATE)?.[3]||'state.gov/cannabis';}
+function getRegulator(c){const m={NV:"Cannabis Compliance Board (CCB)",MO:"Division of Cannabis Regulation (DCR)",IL:"IL Dept of Financial & Professional Regulation (IDFPR)",OH:"Division of Cannabis Control (DMC)",CA:"Department of Cannabis Control (DCC)",CO:"Marijuana Enforcement Division (MED)",MI:"Cannabis Regulatory Agency (CRA)",AZ:"ADHS Bureau of Marijuana Licensing",NY:"Office of Cannabis Management (OCM)",NJ:"Cannabis Regulatory Commission (CRC)",MA:"Cannabis Control Commission (CCC)",WV:"Office of Medical Cannabis (OMC)",FL:"Office of Medical Marijuana Use (OMMU)",PA:"PA Dept. of Health — Office of Medical Marijuana",OK:"Oklahoma Medical Marijuana Authority (OMMA)"};return m[c]||'State Cannabis Regulatory Authority';}
+function mdToHtml(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*([^*\n]+)\*/g,'<em>$1</em>').replace(/`([^`]+)`/g,'<code>$1</code>').replace(/^#{1,4} (.+)$/gm,'<h4>$1</h4>').replace(/^> (.+)$/gm,'<blockquote>$1</blockquote>').replace(/^- (.+)$/gm,'<li>$1</li>').replace(/(<li>[\s\S]+?(?=<\/li>)<\/li>)/g,m=>'<ul>'+m+'</ul>').replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal-overlay.open').forEach(m=>m.classList.remove('open'));});
+</script>
+</body>
+</html>
