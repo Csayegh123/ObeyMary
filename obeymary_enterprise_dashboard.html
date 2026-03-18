@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<div id="om-root" style="display:flex;height:680px;font-family:var(--font-sans);font-size:14px;background:var(--color-background-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;border:0.5px solid var(--color-border-tertiary);">
+
+<style>
+:root{--om-green:#5cb82e;--om-green-dim:#3a7a1a;--om-green-bg:#eaf3de;}
+*{box-sizing:border-box;margin:0;padding:0;}
+#om-sidebar{width:200px;min-width:200px;background:var(--color-background-primary);border-right:0.5px solid var(--color-border-tertiary);display:flex;flex-direction:column;padding:0;}
+.om-logo{display:flex;align-items:center;gap:8px;padding:16px 14px 12px;border-bottom:0.5px solid var(--color-border-tertiary);}
+.om-logo-icon{width:26px;height:26px;background:var(--om-green);border-radius:6px;display:flex;align-items:center;justify-content:center;}
+.om-logo-leaf{width:14px;height:14px;fill:#fff;}
+.om-logo-text{font-size:13px;font-weight:500;color:var(--color-text-primary);letter-spacing:.04em;}
+.om-nav{padding:10px 8px;flex:1;}
+.om-nav-label{font-size:10px;font-weight:500;color:var(--color-text-tertiary);letter-spacing:.08em;text-transform:uppercase;padding:8px 6px 4px;}
+.om-nav-item{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:var(--border-radius-md);cursor:pointer;color:var(--color-text-secondary);font-size:13px;transition:background .15s;}
+.om-nav-item:hover{background:var(--color-background-secondary);}
+.om-nav-item.active{background:var(--om-green-bg);color:var(--om-green-dim);font-weight:500;}
+.om-nav-icon{width:15px;height:15px;flex-shrink:0;opacity:.7;}
+.om-nav-item.active .om-nav-icon{opacity:1;}
+.om-state-section{padding:8px;border-top:0.5px solid var(--color-border-tertiary);}
+.om-state-label{font-size:10px;font-weight:500;color:var(--color-text-tertiary);letter-spacing:.08em;text-transform:uppercase;padding:4px 6px;}
+.om-state-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 7px;border-radius:20px;font-size:11px;cursor:pointer;margin:2px 3px;border:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary);color:var(--color-text-secondary);}
+.om-state-chip.active{background:var(--om-green-bg);border-color:var(--om-green);color:var(--om-green-dim);font-weight:500;}
+.om-state-dot{width:6px;height:6px;border-radius:50%;background:currentColor;}
+.om-user-row{padding:10px 12px;border-top:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;gap:8px;}
+.om-avatar{width:28px;height:28px;border-radius:50%;background:var(--om-green-bg);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--om-green-dim);}
+.om-user-info{flex:1;min-width:0;}
+.om-user-name{font-size:12px;font-weight:500;color:var(--color-text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.om-user-role{font-size:10px;color:var(--color-text-tertiary);}
+#om-main{flex:1;display:flex;flex-direction:column;min-width:0;}
+#om-topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);}
+.om-page-title{font-size:15px;font-weight:500;color:var(--color-text-primary);}
+.om-tab-bar{display:flex;gap:2px;padding:0 16px;background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary);}
+.om-tab{padding:10px 14px;font-size:13px;cursor:pointer;border-bottom:2px solid transparent;color:var(--color-text-secondary);white-space:nowrap;}
+.om-tab.active{color:var(--om-green-dim);border-bottom-color:var(--om-green);font-weight:500;}
+.om-tab-content{flex:1;overflow-y:auto;padding:16px;}
+.om-panel{display:none;}
+.om-panel.active{display:flex;flex-direction:column;gap:12px;}
+.om-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;}
+.om-card-header{padding:12px 14px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;justify-content:space-between;}
+.om-card-title{font-size:13px;font-weight:500;color:var(--color-text-primary);}
+.om-badge{padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;}
+.om-badge-warn{background:#faeeda;color:#854f0b;}
+.om-badge-ok{background:var(--om-green-bg);color:var(--om-green-dim);}
+.om-badge-info{background:#e6f1fb;color:#185fa5;}
+.om-badge-danger{background:#fcebeb;color:#a32d2d;}
+.om-feed-item{display:flex;gap:10px;padding:11px 14px;border-bottom:0.5px solid var(--color-border-tertiary);cursor:pointer;transition:background .12s;}
+.om-feed-item:last-child{border-bottom:none;}
+.om-feed-item:hover{background:var(--color-background-secondary);}
+.om-feed-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+.om-feed-dot-green{background:var(--om-green);}
+.om-feed-dot-amber{background:#ef9f27;}
+.om-feed-dot-red{background:#e24b4a;}
+.om-feed-dot-blue{background:#378add;}
+.om-feed-body{flex:1;min-width:0;}
+.om-feed-actor{font-size:12px;font-weight:500;color:var(--color-text-primary);}
+.om-feed-meta{font-size:12px;color:var(--color-text-secondary);margin-top:1px;line-height:1.5;}
+.om-feed-time{font-size:11px;color:var(--color-text-tertiary);white-space:nowrap;margin-top:2px;}
+.om-feed-tag{display:inline-block;padding:1px 6px;border-radius:3px;font-size:10px;font-weight:500;margin-left:4px;vertical-align:middle;}
+.om-query-box{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px;}
+.om-query-input-row{display:flex;gap:8px;}
+#om-query-input{flex:1;padding:9px 12px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-secondary);font-size:13px;color:var(--color-text-primary);font-family:var(--font-sans);resize:none;height:38px;}
+#om-query-input:focus{outline:none;border-color:var(--om-green);}
+#om-query-btn{padding:9px 16px;background:var(--om-green);color:#fff;border:none;border-radius:var(--border-radius-md);font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;}
+#om-query-btn:hover{opacity:.9;}
+.om-suggestions{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.om-suggestion{padding:4px 10px;border-radius:20px;border:0.5px solid var(--color-border-tertiary);font-size:11px;color:var(--color-text-secondary);cursor:pointer;background:var(--color-background-secondary);}
+.om-suggestion:hover{border-color:var(--om-green);color:var(--om-green-dim);}
+#om-query-result{margin-top:12px;display:none;}
+.om-result-card{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:12px;}
+.om-result-status{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.om-result-check{width:18px;height:18px;border-radius:50%;background:var(--om-green);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.om-result-check svg{width:10px;height:10px;fill:#fff;}
+.om-result-title{font-size:13px;font-weight:500;color:var(--om-green-dim);}
+.om-result-threads{margin-top:6px;display:flex;flex-direction:column;gap:6px;}
+.om-result-thread{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:9px 11px;}
+.om-thread-date{font-size:11px;font-weight:500;color:var(--color-text-primary);}
+.om-thread-desc{font-size:11px;color:var(--color-text-secondary);margin-top:2px;line-height:1.5;}
+.om-thread-flag{display:inline-flex;align-items:center;gap:3px;font-size:10px;color:#854f0b;background:#faeeda;padding:1px 6px;border-radius:3px;margin-top:3px;}
+.om-typing{display:flex;align-items:center;gap:4px;padding:6px 0;}
+.om-typing-dot{width:5px;height:5px;border-radius:50%;background:var(--color-text-tertiary);animation:omTyping 1.2s infinite ease-in-out;}
+.om-typing-dot:nth-child(2){animation-delay:.2s;}
+.om-typing-dot:nth-child(3){animation-delay:.4s;}
+@keyframes omTyping{0%,100%{opacity:.3;transform:translateY(0);}50%{opacity:1;transform:translateY(-2px);}}
+.om-alert-item{display:flex;gap:10px;padding:11px 14px;border-bottom:0.5px solid var(--color-border-tertiary);align-items:flex-start;}
+.om-alert-item:last-child{border-bottom:none;}
+.om-alert-icon{width:28px;height:28px;border-radius:var(--border-radius-md);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.om-alert-icon svg{width:14px;height:14px;}
+.om-thread-report{padding:12px 14px;}
+.om-report-field{display:flex;gap:8px;padding:5px 0;border-bottom:0.5px solid var(--color-border-tertiary);}
+.om-report-field:last-child{border-bottom:none;}
+.om-report-key{font-size:11px;color:var(--color-text-tertiary);width:110px;flex-shrink:0;padding-top:1px;}
+.om-report-val{font-size:12px;color:var(--color-text-primary);flex:1;}
+.om-report-summary{font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-top:6px;padding:10px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);}
+.om-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:4px;}
+.om-stat-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:12px;}
+.om-stat-label{font-size:11px;color:var(--color-text-tertiary);margin-bottom:4px;}
+.om-stat-value{font-size:22px;font-weight:500;color:var(--color-text-primary);}
+.om-stat-sub{font-size:11px;color:var(--color-text-secondary);margin-top:2px;}
+.om-stat-value.warn{color:#854f0b;}
+.om-stat-value.ok{color:var(--om-green-dim);}
+</style>
+
+<div id="om-sidebar">
+  <div class="om-logo">
+    <div class="om-logo-icon">
+      <svg class="om-logo-leaf" viewBox="0 0 24 24"><path d="M12 2C12 2 8 6 7 10C6 13.5 7.5 17 11 18.5C11.5 18.7 12 18.5 12 18.5C12 18.5 12.5 18.7 13 18.5C16.5 17 18 13.5 17 10C16 6 12 2 12 2Z"/></svg>
+    </div>
+    <span class="om-logo-text">OBEYMARY</span>
+  </div>
+  <nav class="om-nav">
+    <div class="om-nav-label">Workspace</div>
+    <div class="om-nav-item active" onclick="setNav(this,'feed')">
+      <svg class="om-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h18M3 6h18M3 18h18"/></svg>Activity Feed
+    </div>
+    <div class="om-nav-item" onclick="setNav(this,'query')">
+      <svg class="om-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Query
+    </div>
+    <div class="om-nav-item" onclick="setNav(this,'alerts')">
+      <svg class="om-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg>Alerts <span style="margin-left:auto;background:#e24b4a;color:#fff;font-size:10px;padding:1px 5px;border-radius:20px;">3</span>
+    </div>
+    <div class="om-nav-item" onclick="setNav(this,'reports')">
+      <svg class="om-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>Thread Reports
+    </div>
+    <div class="om-nav-label" style="margin-top:8px;">Analytics</div>
+    <div class="om-nav-item" onclick="setNav(this,'overview')">
+      <svg class="om-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Overview
+    </div>
+  </nav>
+  <div class="om-state-section">
+    <div class="om-state-label">State Filter</div>
+    <div style="display:flex;flex-wrap:wrap;padding:2px 0;">
+      <span class="om-state-chip active" onclick="toggleState(this)"><span class="om-state-dot"></span>All</span>
+      <span class="om-state-chip" onclick="toggleState(this)"><span class="om-state-dot"></span>NV</span>
+      <span class="om-state-chip" onclick="toggleState(this)"><span class="om-state-dot"></span>MO</span>
+      <span class="om-state-chip" onclick="toggleState(this)"><span class="om-state-dot"></span>OH</span>
+      <span class="om-state-chip" onclick="toggleState(this)"><span class="om-state-dot"></span>IL</span>
+      <span class="om-state-chip" onclick="toggleState(this)"><span class="om-state-dot"></span>WV</span>
+    </div>
+  </div>
+  <div class="om-user-row">
+    <div class="om-avatar">CS</div>
+    <div class="om-user-info">
+      <div class="om-user-name">Chris Sage</div>
+      <div class="om-user-role">Marketing Specialist</div>
+    </div>
+  </div>
+</div>
+
+<div id="om-main">
+  <div id="om-topbar">
+    <div class="om-page-title" id="om-page-title">Activity Feed</div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <div style="font-size:11px;color:var(--color-text-tertiary);">Greenlight Corporation</div>
+      <div style="width:6px;height:6px;border-radius:50%;background:var(--om-green);"></div>
+      <div style="font-size:11px;color:var(--om-green-dim);">35 locations synced</div>
+    </div>
+  </div>
+
+  <div class="om-tab-bar" id="om-tab-bar"></div>
+
+  <div class="om-tab-content" id="om-tab-content">
+
+    <div id="panel-feed" class="om-panel active">
+      <div class="om-stat-row">
+        <div class="om-stat-card">
+          <div class="om-stat-label">Open threads</div>
+          <div class="om-stat-value warn">7</div>
+          <div class="om-stat-sub">Awaiting state response</div>
+        </div>
+        <div class="om-stat-card">
+          <div class="om-stat-label">Resolved (30d)</div>
+          <div class="om-stat-value ok">24</div>
+          <div class="om-stat-sub">Across 5 states</div>
+        </div>
+        <div class="om-stat-card">
+          <div class="om-stat-label">Overdue alerts</div>
+          <div class="om-stat-value warn">3</div>
+          <div class="om-stat-sub">&gt;7 days without reply</div>
+        </div>
+      </div>
+      <div class="om-card">
+        <div class="om-card-header">
+          <span class="om-card-title">Recent compliance communications</span>
+          <span class="om-badge om-badge-info">Live</span>
+        </div>
+        <div id="om-feed-list">
+          <div class="om-feed-item" onclick="openReport('nv-adv')">
+            <div class="om-feed-dot om-feed-dot-amber"></div>
+            <div class="om-feed-body">
+              <div class="om-feed-actor">James Holloway <span style="font-weight:400;color:var(--color-text-secondary);">emailed</span> Nevada Cannabis Compliance Board</div>
+              <div class="om-feed-meta">Re: Q2 advertising creative review — buffer zone clarification near UNLV campus<span class="om-feed-tag om-badge-warn">Awaiting reply</span></div>
+            </div>
+            <div class="om-feed-time">Mar 14<br>10:22 AM</div>
+          </div>
+          <div class="om-feed-item">
+            <div class="om-feed-dot om-feed-dot-green"></div>
+            <div class="om-feed-body">
+              <div class="om-feed-actor">Ohio Division of Cannabis Control <span style="font-weight:400;color:var(--color-text-secondary);">replied to</span> Sarah Chen</div>
+              <div class="om-feed-meta">Re: Edible packaging label — font size & contrast requirements confirmed<span class="om-feed-tag om-badge-ok">Resolved</span></div>
+            </div>
+            <div class="om-feed-time">Mar 16<br>2:47 PM</div>
+          </div>
+          <div class="om-feed-item">
+            <div class="om-feed-dot om-feed-dot-red"></div>
+            <div class="om-feed-body">
+              <div class="om-feed-actor">James Holloway <span style="font-weight:400;color:var(--color-text-secondary);">emailed</span> Missouri DHSS</div>
+              <div class="om-feed-meta">Re: Q4 inventory discrepancy report — no reply received<span class="om-feed-tag om-badge-danger">28 days overdue</span></div>
+            </div>
+            <div class="om-feed-time">Feb 18<br>9:05 AM</div>
+          </div>
+          <div class="om-feed-item">
+            <div class="om-feed-dot om-feed-dot-blue"></div>
+            <div class="om-feed-body">
+              <div class="om-feed-actor">Illinois Dept. of Financial &amp; Prof. Regulation <span style="font-weight:400;color:var(--color-text-secondary);">sent to</span> Compliance Team</div>
+              <div class="om-feed-meta">Updated social media advertising guidance — effective April 1, 2026<span class="om-feed-tag om-badge-info">New regulation</span></div>
+            </div>
+            <div class="om-feed-time">Mar 10<br>3:14 PM</div>
+          </div>
+          <div class="om-feed-item">
+            <div class="om-feed-dot om-feed-dot-green"></div>
+            <div class="om-feed-body">
+              <div class="om-feed-actor">Sarah Chen <span style="font-weight:400;color:var(--color-text-secondary);">emailed</span> West Virginia Office of Medical Cannabis</div>
+              <div class="om-feed-meta">Re: Employee agent card renewal — 3 staff members expiring May 2026</div>
+            </div>
+            <div class="om-feed-time">Mar 12<br>11:38 AM</div>
+          </div>
+          <div class="om-feed-item">
+            <div class="om-feed-dot om-feed-dot-amber"></div>
+            <div class="om-feed-body">
+              <div class="om-feed-actor">Nevada Cannabis Compliance Board <span style="font-weight:400;color:var(--color-text-secondary);">replied to</span> James Holloway</div>
+              <div class="om-feed-meta">Re: METRC inventory reconciliation deadlines confirmed for Q1 filing</div>
+            </div>
+            <div class="om-feed-time">Mar 6<br>1:15 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-query" class="om-panel">
+      <div class="om-query-box">
+        <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px;">Ask anything about your compliance communications history</div>
+        <div class="om-query-input-row">
+          <input id="om-query-input" type="text" placeholder="Has James emailed Nevada compliance this month?" />
+          <button id="om-query-btn" onclick="runQuery()">Ask</button>
+        </div>
+        <div class="om-suggestions">
+          <span class="om-suggestion" onclick="fillQuery('Has anyone emailed Ohio about packaging this quarter?')">Ohio packaging emails</span>
+          <span class="om-suggestion" onclick="fillQuery('Are there any unanswered emails from a state agency older than 7 days?')">Overdue state replies</span>
+          <span class="om-suggestion" onclick="fillQuery('What did Missouri say about inventory last month?')">MO inventory thread</span>
+          <span class="om-suggestion" onclick="fillQuery('Show me all Illinois regulation updates in 2026')">IL regulation updates</span>
+          <span class="om-suggestion" onclick="fillQuery('Which staff members have sent compliance emails this month?')">Staff activity</span>
+        </div>
+        <div id="om-query-result">
+          <div style="height:0.5px;background:var(--color-border-tertiary);margin:12px 0;"></div>
+          <div id="om-query-typing" class="om-typing"><div class="om-typing-dot"></div><div class="om-typing-dot"></div><div class="om-typing-dot"></div></div>
+          <div id="om-query-answer" class="om-result-card" style="display:none;"></div>
+        </div>
+      </div>
+      <div class="om-card" style="margin-top:4px;">
+        <div class="om-card-header"><span class="om-card-title">Recent queries</span></div>
+        <div id="om-recent-queries" style="padding:8px 14px;display:flex;flex-direction:column;gap:6px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:0.5px solid var(--color-border-tertiary);">
+            <span style="font-size:12px;color:var(--color-text-secondary);">"Has James emailed Missouri compliance about inventory?"</span>
+            <span style="font-size:11px;color:var(--color-text-tertiary);">Today</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:0.5px solid var(--color-border-tertiary);">
+            <span style="font-size:12px;color:var(--color-text-secondary);">"What packaging rules changed in Ohio this year?"</span>
+            <span style="font-size:11px;color:var(--color-text-tertiary);">Mar 15</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;">
+            <span style="font-size:12px;color:var(--color-text-secondary);">"Show all unanswered NV threads from last 30 days"</span>
+            <span style="font-size:11px;color:var(--color-text-tertiary);">Mar 13</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-alerts" class="om-panel">
+      <div class="om-card">
+        <div class="om-card-header">
+          <span class="om-card-title">Active alerts</span>
+          <span class="om-badge om-badge-danger">3 require action</span>
+        </div>
+        <div class="om-alert-item">
+          <div class="om-alert-icon" style="background:#fcebeb;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#a32d2d" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);">No reply from Missouri DHSS — 28 days</div>
+            <div style="font-size:11px;color:var(--color-text-secondary);margin-top:2px;">James Holloway sent Q4 inventory discrepancy report Feb 18. No response received. Risk: escalation.</div>
+          </div>
+          <span class="om-badge om-badge-danger" style="margin-top:2px;">High</span>
+        </div>
+        <div class="om-alert-item">
+          <div class="om-alert-icon" style="background:#faeeda;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#854f0b" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);">Nevada advertising review — 4 days without reply</div>
+            <div style="font-size:11px;color:var(--color-text-secondary);margin-top:2px;">Buffer zone clarification email sent Mar 14. Creative assets on hold pending response.</div>
+          </div>
+          <span class="om-badge om-badge-warn" style="margin-top:2px;">Medium</span>
+        </div>
+        <div class="om-alert-item">
+          <div class="om-alert-icon" style="background:#e6f1fb;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#185fa5" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);">New Illinois regulation — action required by April 1</div>
+            <div style="font-size:11px;color:var(--color-text-secondary);margin-top:2px;">IL DFPR issued updated social media advertising guidance. Marketing team must review and update 6 active campaigns.</div>
+          </div>
+          <span class="om-badge om-badge-info" style="margin-top:2px;">Action needed</span>
+        </div>
+      </div>
+      <div class="om-card">
+        <div class="om-card-header"><span class="om-card-title">Upcoming compliance deadlines</span></div>
+        <div style="padding:10px 14px;display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);">WV agent card renewals (3 staff)</div>
+              <div style="font-size:11px;color:var(--color-text-secondary);">West Virginia Office of Medical Cannabis</div>
+            </div>
+            <span class="om-badge om-badge-warn">May 2026</span>
+          </div>
+          <div style="height:0.5px;background:var(--color-border-tertiary);"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);">OH dispensary annual inspection prep</div>
+              <div style="font-size:11px;color:var(--color-text-secondary);">Ohio Division of Cannabis Control</div>
+            </div>
+            <span class="om-badge om-badge-info">Jun 2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-reports" class="om-panel">
+      <div class="om-card" id="reports-list-card">
+        <div class="om-card-header"><span class="om-card-title">Thread reports</span></div>
+        <div style="display:flex;flex-direction:column;">
+          <div class="om-feed-item" onclick="openReport('oh-pkg')">
+            <div class="om-feed-dot om-feed-dot-green"></div>
+            <div class="om-feed-body">
+              <div class="om-feed-actor">OH — Packaging label compliance <span class="om-badge om-badge-ok" style="margin-left:6px;">Resolved</span></div>
+              <div class="om-feed-meta">Sarah Chen &bull; Ohio DCC &bull; 3 messages &bull; Mar 12–16</div>
+            </div>
+            <div class="om-feed-time" style="color:var(--om-green-dim);">View →</div>
+          </div>
+          <div class="om-feed-item" onclick="openReport('nv-adv')">
+            <div class="om-feed-dot om-feed-dot-amber"></div>
+            <div class="om-feed-body">
+              <div class="om-feed-actor">NV — Advertising buffer zone <span class="om-badge om-badge-warn" style="margin-left:6px;">Open</span></div>
+              <div class="om-feed-meta">James Holloway &bull; Nevada CCB &bull; 1 message &bull; Mar 14</div>
+            </div>
+            <div class="om-feed-time" style="color:var(--om-green-dim);">View →</div>
+          </div>
+          <div class="om-feed-item" onclick="openReport('mo-inv')">
+            <div class="om-feed-dot om-feed-dot-red"></div>
+            <div class="om-feed-body">
+              <div class="om-feed-actor">MO — Inventory discrepancy report <span class="om-badge om-badge-danger" style="margin-left:6px;">Overdue</span></div>
+              <div class="om-feed-meta">James Holloway &bull; Missouri DHSS &bull; 1 message &bull; Feb 18</div>
+            </div>
+            <div class="om-feed-time" style="color:var(--om-green-dim);">View →</div>
+          </div>
+        </div>
+      </div>
+      <div class="om-card" id="report-detail-card" style="display:none;">
+        <div class="om-card-header">
+          <span class="om-card-title" id="report-title">Thread Report</span>
+          <button onclick="closeReport()" style="background:none;border:0.5px solid var(--color-border-secondary);padding:3px 10px;border-radius:var(--border-radius-md);font-size:12px;cursor:pointer;color:var(--color-text-secondary);">← Back</button>
+        </div>
+        <div class="om-thread-report" id="report-body"></div>
+      </div>
+    </div>
+
+    <div id="panel-overview" class="om-panel">
+      <div class="om-stat-row">
+        <div class="om-stat-card"><div class="om-stat-label">Total threads indexed</div><div class="om-stat-value">142</div><div class="om-stat-sub">Since Jan 2025</div></div>
+        <div class="om-stat-card"><div class="om-stat-label">States covered</div><div class="om-stat-value ok">5</div><div class="om-stat-sub">NV, MO, OH, IL, WV</div></div>
+        <div class="om-stat-card"><div class="om-stat-label">Documents in knowledge base</div><div class="om-stat-value">83</div><div class="om-stat-sub">SOPs, licenses, COAs</div></div>
+      </div>
+      <div class="om-card">
+        <div class="om-card-header"><span class="om-card-title">Knowledge base layers</span></div>
+        <div style="padding:12px 14px;display:flex;flex-direction:column;gap:10px;">
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:12px;color:var(--color-text-primary);">Layer 1 — LLM Foundation</span><span style="font-size:11px;color:var(--color-text-tertiary);">Active</span></div>
+            <div style="height:6px;background:var(--color-background-secondary);border-radius:3px;"><div style="width:100%;height:6px;background:var(--om-green);border-radius:3px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:12px;color:var(--color-text-primary);">Layer 2 — Document Training</span><span style="font-size:11px;color:var(--color-text-tertiary);">83 docs</span></div>
+            <div style="height:6px;background:var(--color-background-secondary);border-radius:3px;"><div style="width:72%;height:6px;background:var(--om-green);border-radius:3px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:12px;color:var(--color-text-primary);">Layer 3 — Conversational Training</span><span style="font-size:11px;color:var(--color-text-tertiary);">142 threads</span></div>
+            <div style="height:6px;background:var(--color-background-secondary);border-radius:3px;"><div style="width:55%;height:6px;background:#378add;border-radius:3px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:12px;color:var(--color-text-primary);">Layer 4 — Compliance Seeking</span><span style="font-size:11px;color:var(--color-text-tertiary);">Monitoring 5 states</span></div>
+            <div style="height:6px;background:var(--color-background-secondary);border-radius:3px;"><div style="width:40%;height:6px;background:#ef9f27;border-radius:3px;"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+<script>
+const PANELS={feed:'Activity Feed',query:'Query',alerts:'Alerts',reports:'Thread Reports',overview:'Overview'};
+const REPORTS={
+  'oh-pkg':{title:'OH — Packaging label compliance',fields:[['Topic','Edible packaging label standards'],['State','Ohio'],['Agency','Ohio Division of Cannabis Control'],['Initiated by','Sarah Chen (internal)'],['Opened','March 12, 2026'],['Last activity','March 16, 2026'],['Status','RESOLVED — Confirmed'],['Messages in thread','3'],['Attachments','OhioDCC_LabelGuidance_2026.pdf']],summary:'Sarah inquired about font size requirements for THC warning labels on edible packaging. Ohio DCC confirmed minimum 10pt font with specific color contrast ratios required. Action taken: Design team notified March 16. Two existing SKUs require label redesign before next print run.'},
+  'nv-adv':{title:'NV — Advertising buffer zone',fields:[['Topic','Advertising near UNLV campus — buffer zone'],['State','Nevada'],['Agency','Nevada Cannabis Compliance Board'],['Initiated by','James Holloway (internal)'],['Opened','March 14, 2026'],['Last activity','March 14, 2026'],['Status','OPEN — Awaiting reply (4 days)'],['Messages in thread','1'],['Attachments','None']],summary:'James requested clarification on the applicable buffer zone distance for digital out-of-home advertising placed near UNLV. No response received. Campaign creative is on hold pending confirmation. Recommend follow-up if no reply by March 20.'},
+  'mo-inv':{title:'MO — Q4 inventory discrepancy report',fields:[['Topic','Q4 inventory reconciliation discrepancy'],['State','Missouri'],['Agency','Missouri DHSS'],['Initiated by','James Holloway (internal)'],['Opened','February 18, 2026'],['Last activity','February 18, 2026'],['Status','OVERDUE — 28 days without reply'],['Messages in thread','1'],['Attachments','GreenLight_MO_Q4_Inventory_Discrepancy.pdf']],summary:'James submitted a formal inventory discrepancy report identifying a 0.3% variance in Q4 METRC records. No acknowledgment or response received in 28 days. This is a high-risk thread — recommend immediate phone follow-up with MO DHSS and a certified mail follow-up letter.'},
+};
+const QUERY_RESPONSES={
+  default:{yes:true,count:'3 threads found',threads:[{date:'Mar 4',text:'James asked about METRC inventory reconciliation deadlines. MO DHSS replied Mar 6.',flag:null},{date:'Feb 18',text:'James submitted Q4 inventory discrepancy report. No reply received.',flag:'28 days without response'},{date:'Jan 31',text:'Routine monthly inventory filing confirmed — acknowledged same day.',flag:null}]},
+  ohio:{yes:true,count:'2 threads found',threads:[{date:'Mar 16',text:'Ohio DCC confirmed edible packaging label font size requirements. Thread resolved.',flag:null},{date:'Mar 12',text:'Sarah Chen submitted packaging compliance inquiry. Response received in 4 days.',flag:null}]},
+  overdue:{yes:true,count:'3 overdue threads',threads:[{date:'Feb 18 — MO',text:'James Holloway — inventory discrepancy report. No reply in 28 days.',flag:'Critical — 28 days'},{date:'Mar 14 — NV',text:'James Holloway — advertising buffer zone clarification. No reply in 4 days.',flag:'Follow up recommended'},{date:'Mar 12 — WV',text:'Sarah Chen — agent card renewal inquiry. No reply in 6 days.',flag:'6 days without reply'}]},
+};
+function setNav(el,panel){
+  document.querySelectorAll('.om-nav-item').forEach(n=>n.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.om-panel').forEach(p=>p.classList.remove('active'));
+  const target=document.getElementById('panel-'+panel);
+  if(target)target.classList.add('active');
+  document.getElementById('om-page-title').textContent=PANELS[panel]||panel;
+}
+function toggleState(el){
+  document.querySelectorAll('.om-state-chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+}
+function fillQuery(text){
+  setNav(document.querySelectorAll('.om-nav-item')[1],'query');
+  document.getElementById('om-query-input').value=text;
+  runQuery();
+}
+function runQuery(){
+  const q=document.getElementById('om-query-input').value.trim();
+  if(!q)return;
+  const result=document.getElementById('om-query-result');
+  const typing=document.getElementById('om-query-typing');
+  const answer=document.getElementById('om-query-answer');
+  result.style.display='block';
+  typing.style.display='flex';
+  answer.style.display='none';
+  setTimeout(()=>{
+    typing.style.display='none';
+    let data=QUERY_RESPONSES.default;
+    if(q.toLowerCase().includes('ohio')||q.toLowerCase().includes('packaging'))data=QUERY_RESPONSES.ohio;
+    if(q.toLowerCase().includes('overdue')||q.toLowerCase().includes('unanswered'))data=QUERY_RESPONSES.overdue;
+    answer.style.display='block';
+    answer.innerHTML=`<div class="om-result-status"><div class="om-result-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="1.8" fill="none"/></svg></div><div class="om-result-title">${data.yes?'Yes':'No'} — ${data.count}</div></div><div class="om-result-threads">${data.threads.map(t=>`<div class="om-result-thread"><div class="om-thread-date">${t.date}</div><div class="om-thread-desc">${t.text}</div>${t.flag?`<div class="om-thread-flag"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>${t.flag}</div>`:''}</div>`).join('')}</div>`;
+  },1400);
+}
+document.getElementById('om-query-input').addEventListener('keydown',e=>{if(e.key==='Enter')runQuery();});
+function openReport(id){
+  const r=REPORTS[id];
+  if(!r)return;
+  setNav(document.querySelectorAll('.om-nav-item')[3],'reports');
+  document.getElementById('reports-list-card').style.display='none';
+  const detail=document.getElementById('report-detail-card');
+  detail.style.display='block';
+  document.getElementById('report-title').textContent=r.title;
+  document.getElementById('report-body').innerHTML=`<div>${r.fields.map(f=>`<div class="om-report-field"><div class="om-report-key">${f[0]}</div><div class="om-report-val">${f[1]}</div></div>`).join('')}</div><div class="om-report-summary">${r.summary}</div>`;
+}
+function closeReport(){
+  document.getElementById('reports-list-card').style.display='block';
+  document.getElementById('report-detail-card').style.display='none';
+}
+</script>
